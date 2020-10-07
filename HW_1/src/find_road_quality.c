@@ -53,7 +53,7 @@ int evaluate_amount_lines(size_t lines)
 
 enum Road_quality final_quality(size_t rating)
 {
-    printf("rating = %d\n", rating);
+    printf("rating = %zu\n", rating);
     if (rating >= 81)
         return EXCELLENT;
     if (rating >= 61)
@@ -80,7 +80,7 @@ enum Road_quality find_road_quality(Road_Information* roads, size_t num)
 {
     size_t rating = 0;
 
-    for (int i = 0; i != num; i++)
+    for (size_t i = 0; i != num; i++)
         rating += rate_road(roads[i]);
 
     return final_quality(rating / num);

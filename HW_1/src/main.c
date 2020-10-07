@@ -1,11 +1,14 @@
+//
+// Created by Andrew Kireev on 07.10.2020.
+//
+
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include "road_information.h"
 
-void procces_input(int* n)
+void procces_input(size_t* n)
 {
-    int res = scanf("%d", n);
+    int res = scanf("%zd", n);
     if (!res)
     {
         printf("Введите корректно число дорог!");
@@ -21,8 +24,8 @@ enum Surface_type find_surface(char *str)
         return CONCRETE;
     if (strcmp(str, "CRUSHED_STONE") == 0)
         return CRUSHED_STONE;
-    if (strcmp(str, "SAND") == 0)
-        return SAND;
+//    if (strcmp(str, "SAND") == 0)
+    return SAND;
 }
 
 enum Road_quality find_quality(char *str)
@@ -35,28 +38,28 @@ enum Road_quality find_quality(char *str)
         return NORMAL;
     if (strcmp(str, "BAD") == 0)
         return BAD;
-    if (strcmp(str, "TERRIBLE") == 0)
-        return TERRIBLE;
+//    if (strcmp(str, "TERRIBLE") == 0)
+    return TERRIBLE;
 }
 
 void filling_struct(Road_Information* roads, size_t num)
 {
     printf("%s\n", "Введите информацию о дороге: длинну, качество дороги, тип дорожного полотна и число полос");
-    for (int i = 0; i != num; i++)
+    for (size_t i = 0; i != num; i++)
     {
         char surface[10];
         char quality[10];
-        printf("Введите информацию о %d дороге\n", i);
+        printf("Введите информацию о %zu дороге\n", i);
         scanf("%zd", &roads[i].road_len);
         scanf("%s",quality);
         scanf("%s", surface);
         scanf("%zd", &roads[i].road_lines_num);
         roads[i].surface = find_surface(surface);
         roads[i].quality = find_quality(quality);
-        printf("len = %d\n", roads[i].road_len);
+        printf("len = %zu\n", roads[i].road_len);
         print_quality(roads[i].quality);
         print_surface(roads[i].surface);
-        printf("lines = %d\n", roads[i].road_lines_num);
+        printf("lines = %zu\n", roads[i].road_lines_num);
     }
 }
 
@@ -66,7 +69,6 @@ void filling_struct(Road_Information* roads, size_t num)
 NORMAL
 CONCRETE
 2
-
  49
 NORMAL
 ASHPALT
@@ -78,7 +80,7 @@ int main() {
     printf("%s\n", "Введите количество дорог");
     size_t n;
     procces_input(&n);
-    printf("%d", n);
+    printf("%zu", n);
     Road_Information road_info[n];
     filling_struct(road_info, n);
 
