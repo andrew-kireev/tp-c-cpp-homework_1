@@ -5,7 +5,7 @@
 #include "road_information.h"
 #include <stdio.h>
 
-size_t evaluate_road_quality(enum Road_quality quality)
+size_t evaluate_road_quality(enum Road_quality quality)     //tested
 {
     if (quality == EXCELLENT)
         return 80;
@@ -18,7 +18,7 @@ size_t evaluate_road_quality(enum Road_quality quality)
     return 0;
 }
 
-int evaluate_road_surface(enum Surface_type surface)
+int evaluate_road_surface(enum Surface_type surface)     //tested
 {
     if (surface == CONCRETE)
         return 15;
@@ -29,7 +29,7 @@ int evaluate_road_surface(enum Surface_type surface)
     return -35;
 }
 
-int evaluate_road_len(size_t len)
+int evaluate_road_len(size_t len)     //tested
 {
     if (len >= 200)
         return 20;
@@ -40,20 +40,20 @@ int evaluate_road_len(size_t len)
     return 0;
 }
 
-int evaluate_amount_lines(size_t lines)
+int evaluate_amount_lines(size_t lines)     //tested
 {
     if (lines == 3)
         return 5;
-    if (lines == 4)
+    if (lines >= 4)
         return 10;
     if (lines < 2)
         return -5;
     return 0;
 }
 
-enum Road_quality final_quality(size_t rating)
+enum Road_quality final_quality(int rating)     //tested
 {
-    printf("rating = %zu\n", rating);
+//    printf("rating = %zu\n", rating);
     if (rating >= 81)
         return EXCELLENT;
     if (rating >= 61)
@@ -65,7 +65,7 @@ enum Road_quality final_quality(size_t rating)
     return TERRIBLE;
 }
 
-size_t rate_road(const Road_Information road)
+size_t rate_road(const Road_Information road)     //tested
 {
     size_t rating = 0;
 

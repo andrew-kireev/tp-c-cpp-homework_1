@@ -53,7 +53,7 @@ void filling_struct(Road_Information* roads, size_t num)
         scanf("%zd", &roads[i].road_len);
         scanf("%s",quality);
         scanf("%s", surface);
-        scanf("%zd", &roads[i].road_lines_num);
+        scanf("%zu", &roads[i].road_lines_num);
         roads[i].surface = find_surface(surface);
         roads[i].quality = find_quality(quality);
         printf("len = %zu\n", roads[i].road_len);

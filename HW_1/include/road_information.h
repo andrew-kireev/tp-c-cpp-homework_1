@@ -36,7 +36,7 @@ size_t evaluate_road_quality(enum Road_quality quality);
 int evaluate_road_surface(enum Surface_type surface);
 int evaluate_road_len(size_t len);
 int evaluate_amount_lines(size_t lines);
-enum Road_quality final_quality(size_t rating);
+enum Road_quality final_quality(int rating);
 size_t rate_road(const Road_Information road);
 enum Road_quality find_road_quality(Road_Information* roads, size_t num);
 void   print_quality(enum Road_quality quality);
