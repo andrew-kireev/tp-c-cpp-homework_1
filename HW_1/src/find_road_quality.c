@@ -53,6 +53,7 @@ int evaluate_amount_lines(size_t lines)
 
 enum Road_quality final_quality(size_t rating)
 {
+    printf("rating = %d\n", rating);
     if (rating >= 81)
         return EXCELLENT;
     if (rating >= 61)
@@ -97,5 +98,17 @@ void   print_quality(enum Road_quality quality)
         printf("%s\n", "BAD");
     if (quality == TERRIBLE)
         printf("%s\n", "TERRIBLE");
+}
+
+void   print_surface(enum Surface_type surface)
+{
+    if (surface == SAND)
+        printf("%s\n", "SAND");
+    if (surface == CRUSHED_STONE)
+        printf("%s\n", "CRUSHED_STONE");
+    if (surface == CONCRETE)
+        printf("%s\n", "CONCRETE");
+    if (surface == ASHPALT)
+        printf("%s\n", "ASHPALT");
 }
 

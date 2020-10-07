@@ -40,5 +40,6 @@ enum Road_quality final_quality(size_t rating);
 size_t rate_road(const Road_Information road);
 enum Road_quality find_road_quality(Road_Information* roads, size_t num);
 void   print_quality(enum Road_quality quality);
+void   print_surface(enum Surface_type surface);
 
 #endif //HW_1_ROAD_INFORMATION_H
