@@ -3,7 +3,6 @@
 //
 
 #include <stdio.h>
-#include <string.h>
 #include "road_information.h"
 
 void procces_input(size_t* n)
@@ -14,32 +13,6 @@ void procces_input(size_t* n)
         printf("Введите корректно число дорог!");
         procces_input(n);
     }
-}
-
-enum Surface_type find_surface(char *str)
-{
-    if (strcmp(str, "ASHPALT") == 0)
-        return ASHPALT;
-    if (strcmp(str, "CONCRETE") == 0)
-        return CONCRETE;
-    if (strcmp(str, "CRUSHED_STONE") == 0)
-        return CRUSHED_STONE;
-//    if (strcmp(str, "SAND") == 0)
-    return SAND;
-}
-
-enum Road_quality find_quality(char *str)
-{
-    if (strcmp(str, "EXCELLENT") == 0)
-        return EXCELLENT;
-    if (strcmp(str, "GOOD") == 0)
-        return GOOD;
-    if (strcmp(str, "NORMAL") == 0)
-        return NORMAL;
-    if (strcmp(str, "BAD") == 0)
-        return BAD;
-//    if (strcmp(str, "TERRIBLE") == 0)
-    return TERRIBLE;
 }
 
 void filling_struct(Road_Information* roads, size_t num)
@@ -62,19 +35,6 @@ void filling_struct(Road_Information* roads, size_t num)
         printf("lines = %zu\n", roads[i].road_lines_num);
     }
 }
-
-
-/*
- 300
-NORMAL
-CONCRETE
-2
- 49
-NORMAL
-ASHPALT
-3
- = 45
- */
 
 int main() {
     printf("%s\n", "Введите количество дорог");

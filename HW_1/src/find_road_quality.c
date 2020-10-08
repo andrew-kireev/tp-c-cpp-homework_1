@@ -4,6 +4,7 @@
 
 #include "road_information.h"
 #include <stdio.h>
+#include <string.h>
 
 size_t evaluate_road_quality(enum Road_quality quality)     //tested
 {
@@ -53,7 +54,6 @@ int evaluate_amount_lines(size_t lines)     //tested
 
 enum Road_quality final_quality(int rating)     //tested
 {
-//    printf("rating = %zu\n", rating);
     if (rating >= 81)
         return EXCELLENT;
     if (rating >= 61)
@@ -76,7 +76,7 @@ size_t rate_road(const Road_Information road)     //tested
     return rating;
 }
 
-enum Road_quality find_road_quality(Road_Information* roads, size_t num)
+enum Road_quality find_road_quality(Road_Information* roads, size_t num)     //tested
 {
     size_t rating = 0;
 
@@ -110,5 +110,31 @@ void   print_surface(enum Surface_type surface)
         printf("%s\n", "CONCRETE");
     if (surface == ASHPALT)
         printf("%s\n", "ASHPALT");
+}
+
+enum Surface_type find_surface(char *str)     //tested
+{
+    if (strcmp(str, "ASHPALT") == 0)
+        return ASHPALT;
+    if (strcmp(str, "CONCRETE") == 0)
+        return CONCRETE;
+    if (strcmp(str, "CRUSHED_STONE") == 0)
+        return CRUSHED_STONE;
+//    if (strcmp(str, "SAND") == 0)
+    return SAND;
+}
+
+enum Road_quality find_quality(char *str)
+{
+    if (strcmp(str, "EXCELLENT") == 0)
+        return EXCELLENT;
+    if (strcmp(str, "GOOD") == 0)
+        return GOOD;
+    if (strcmp(str, "NORMAL") == 0)
+        return NORMAL;
+    if (strcmp(str, "BAD") == 0)
+        return BAD;
+//    if (strcmp(str, "TERRIBLE") == 0)
+    return TERRIBLE;
 }
 

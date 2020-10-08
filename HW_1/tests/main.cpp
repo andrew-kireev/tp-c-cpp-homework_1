@@ -2,6 +2,7 @@
 // Created by Andrew Kireev on 07.10.2020.
 //
 #include <gtest/gtest.h>
+#include <string>
 #include <iostream>
 
 extern "C" {
@@ -107,7 +108,147 @@ TEST(rate_road, rate_road_test1) {
     ASSERT_EQ(-5, rate_road(road3));
 }
 
+//find_road_qality
 
+TEST(find_road_quality, find_road_quality_test1) {
+    Road_Information road[4];
+
+    road[0].quality = GOOD;
+    road[0].surface = SAND;
+    road[0].road_len = 110;
+    road[0].road_lines_num = 1;
+
+
+    road[1].quality = TERRIBLE;
+    road[1].surface = CONCRETE;
+    road[1].road_len = 500;
+    road[1].road_lines_num = 5;
+
+    road[2].quality = NORMAL;
+    road[2].surface = CRUSHED_STONE;
+    road[2].road_len = 500;
+    road[2].road_lines_num = 8;
+
+    road[3].quality = BAD;
+    road[3].surface = CRUSHED_STONE;
+    road[3].road_len = 100;
+    road[3].road_lines_num = 2;
+
+    enum Road_quality quality = find_road_quality(road, 4);
+
+    ASSERT_EQ(BAD, quality);
+}
+
+
+TEST(find_road_quality, find_road_quality_test2) {
+    Road_Information road[4];
+
+    road[0].quality = GOOD;
+    road[0].surface = CRUSHED_STONE;
+    road[0].road_len = 500;
+    road[0].road_lines_num = 3;
+
+
+    road[1].quality = GOOD;
+    road[1].surface = CONCRETE;
+    road[1].road_len = 10;
+    road[1].road_lines_num = 1;
+
+    road[2].quality = NORMAL;
+    road[2].surface = CRUSHED_STONE;
+    road[2].road_len = 500;
+    road[2].road_lines_num = 8;
+
+    road[3].quality = BAD;
+    road[3].surface = CRUSHED_STONE;
+    road[3].road_len = 100;
+    road[3].road_lines_num = 2;
+    enum Road_quality quality = find_road_quality(road, 4);
+    ASSERT_EQ(BAD, quality);
+}
+
+TEST(find_road_quality, find_road_quality_test3) {
+    Road_Information road[4];
+
+    road[0].quality = GOOD;
+    road[0].surface = ASHPALT;
+    road[0].road_len = 110;
+    road[0].road_lines_num = 1;
+
+
+    road[1].quality = EXCELLENT;
+    road[1].surface = CONCRETE;
+    road[1].road_len = 500;
+    road[1].road_lines_num = 5;
+
+    road[2].quality = NORMAL;
+    road[2].surface = CONCRETE;
+    road[2].road_len = 500;
+    road[2].road_lines_num = 8;
+
+    road[3].quality = EXCELLENT;
+    road[3].surface = ASHPALT;
+    road[3].road_len = 100;
+    road[3].road_lines_num = 2;
+
+    enum Road_quality quality = find_road_quality(road, 4);
+    ASSERT_EQ(EXCELLENT, quality);
+}
+
+
+TEST(find_surface, find_surface_test1) {
+
+    char str1[] = "ASHPALT";
+
+    enum Surface_type surface = find_surface(str1);
+
+    ASSERT_EQ(ASHPALT, surface);
+
+    char str2[] = "CONCRETE";
+
+    surface = find_surface(str2);
+
+    ASSERT_EQ(CONCRETE, surface);
+
+    char str3[] = "CRUSHED_STONE";
+
+    surface = find_surface(str3);
+
+    ASSERT_EQ(CRUSHED_STONE, surface);
+
+    char str4[] = "SAND";
+
+    surface = find_surface(str4);
+
+    ASSERT_EQ(SAND, surface);
+}
+
+TEST(find_quality, find_quality_test1) {
+
+    char str1[] = "EXCELLENT";
+
+    enum Road_quality quality = find_quality(str1);
+
+    ASSERT_EQ(EXCELLENT, quality);
+
+    char str2[] = "GOOD";
+
+    quality = find_quality(str2);
+
+    ASSERT_EQ(GOOD, quality);
+
+    char str3[] = "NORMAL";
+
+    quality = find_quality(str3);
+
+    ASSERT_EQ(NORMAL, quality);
+
+    char str4[] = "TERRIBLE";
+
+    quality = find_quality(str4);
+
+    ASSERT_EQ(TERRIBLE, quality);
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
