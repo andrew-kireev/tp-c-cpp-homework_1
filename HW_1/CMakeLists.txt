@@ -23,7 +23,7 @@ if(TRUE)
     add_executable(tests
             ${INC_DIR}/road_information.h
             ${SRC_DIR}/find_road_quality.c
-            ${TESTS_DIR}/main.cpp)
+            tests/main.cpp)
 
     target_include_directories(tests PUBLIC ${INC_DIR})
 
