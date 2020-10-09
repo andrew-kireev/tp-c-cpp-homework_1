@@ -20,18 +20,18 @@ include_directories("${GTEST_INCLUDE_DIRS}")
 include_directories(include)
 
 if(TRUE)
-    add_executable(tests
+    add_executable(TEST
             ${INC_DIR}/road_information.h
             ${SRC_DIR}/find_road_quality.c
             tests/main.cpp)
 
-    target_include_directories(tests PUBLIC ${INC_DIR})
+    target_include_directories(TEST PUBLIC ${INC_DIR})
 
-    target_link_libraries(tests ${GTEST_LIBRARIES} Threads::Threads)
+    target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads)
 
 
     enable_testing()
-    add_test(NAME tests COMMAND tests)
+    add_test(NAME TEST COMMAND tests)
 else()
     add_executable(HW_1
             ${SRC_DIR}/main.c
