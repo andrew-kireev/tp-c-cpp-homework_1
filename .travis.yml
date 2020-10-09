@@ -19,7 +19,7 @@ addons:
 
 before_script:
   - cd HW_1
-  - cmake CMakeLists.txt
+  - cmake .
   - make
 
 script:
