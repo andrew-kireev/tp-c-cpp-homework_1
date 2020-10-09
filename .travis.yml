@@ -18,6 +18,7 @@ addons:
       - gcovr
 
 before_script:
+  - cd HW_1
   - cmake CMakeLists.txt
   - make
 
