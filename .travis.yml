@@ -16,6 +16,7 @@ addons:
       - valgrind
       - cppcheck
       - gcovr
+      - libgtest-dev
 
 before_script:
   - cd HW_1
