@@ -16,9 +16,13 @@ addons:
       - valgrind
       - cppcheck
       - gcovr
-      - libgtest-dev
 
 before_script:
+  - sudo apt-get install -y libgtest-dev
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt && sudo make
+  - sudo cp *.a /usr/lib
+  - cd "${TRAVIS_BUILD_DIR}"
   - cd HW_1
   - cmake .
   - make
