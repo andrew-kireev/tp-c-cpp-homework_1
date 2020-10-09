@@ -2,8 +2,8 @@
 // Created by Andrew Kireev on 07.10.2020.
 //
 
-#ifndef HW_1_ROAD_INFORMATION_H
-#define HW_1_ROAD_INFORMATION_H
+#ifndef HW_1_PROJECT_INCLUDE_ROAD_INFORMATION_H_
+#define HW_1_PROJECT_INCLUDE_ROAD_INFORMATION_H_
 
 #include <stdlib.h>
 
@@ -22,13 +22,11 @@ enum Road_quality {
     TERRIBLE
 };
 
-typedef struct
-{
+typedef struct {
     size_t road_len;
     enum Surface_type surface;
     enum Road_quality quality;
     size_t road_lines_num;
-
 } Road_Information;
 
 
@@ -44,4 +42,4 @@ void   print_surface(enum Surface_type surface);
 enum Surface_type find_surface(char *str);
 enum Road_quality find_quality(char *str);
 
-#endif //HW_1_ROAD_INFORMATION_H
+#endif  // HW_1_PROJECT_INCLUDE_ROAD_INFORMATION_H_

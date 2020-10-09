@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-size_t evaluate_road_quality(enum Road_quality quality)     //tested
-{
+size_t evaluate_road_quality(enum Road_quality quality) {    // tested
     if (quality == EXCELLENT)
         return 80;
     if (quality == GOOD)
@@ -19,8 +18,7 @@ size_t evaluate_road_quality(enum Road_quality quality)     //tested
     return 0;
 }
 
-int evaluate_road_surface(enum Surface_type surface)     //tested
-{
+int evaluate_road_surface(enum Surface_type surface) {    // tested
     if (surface == CONCRETE)
         return 15;
     if (surface == ASHPALT)
@@ -30,8 +28,7 @@ int evaluate_road_surface(enum Surface_type surface)     //tested
     return -35;
 }
 
-int evaluate_road_len(size_t len)     //tested
-{
+int evaluate_road_len(size_t len) {    // tested
     if (len >= 200)
         return 20;
     if (len >= 100)
@@ -41,8 +38,7 @@ int evaluate_road_len(size_t len)     //tested
     return 0;
 }
 
-int evaluate_amount_lines(size_t lines)     //tested
-{
+int evaluate_amount_lines(size_t lines) {    // tested
     if (lines == 3)
         return 5;
     if (lines >= 4)
@@ -52,8 +48,7 @@ int evaluate_amount_lines(size_t lines)     //tested
     return 0;
 }
 
-enum Road_quality final_quality(int rating)     //tested
-{
+enum Road_quality final_quality(int rating) {    // tested
     if (rating >= 81)
         return EXCELLENT;
     if (rating >= 61)
@@ -65,8 +60,7 @@ enum Road_quality final_quality(int rating)     //tested
     return TERRIBLE;
 }
 
-size_t rate_road(const Road_Information road)     //tested
-{
+size_t rate_road(const Road_Information road) {    // tested
     size_t rating = 0;
 
     rating += evaluate_road_quality(road.quality);
@@ -76,8 +70,7 @@ size_t rate_road(const Road_Information road)     //tested
     return rating;
 }
 
-enum Road_quality find_road_quality(Road_Information* roads, size_t num)     //tested
-{
+enum Road_quality find_road_quality(Road_Information* roads, size_t num) {    // tested
     size_t rating = 0;
 
     for (size_t i = 0; i != num; i++)
@@ -86,8 +79,7 @@ enum Road_quality find_road_quality(Road_Information* roads, size_t num)     //t
     return final_quality(rating / num);
 }
 
-void   print_quality(enum Road_quality quality)
-{
+void   print_quality(enum Road_quality quality) {
     if (quality == EXCELLENT)
         printf("%s\n", "EXCELLENT");
     if (quality == GOOD)
@@ -100,8 +92,7 @@ void   print_quality(enum Road_quality quality)
         printf("%s\n", "TERRIBLE");
 }
 
-void   print_surface(enum Surface_type surface)
-{
+void   print_surface(enum Surface_type surface) {
     if (surface == SAND)
         printf("%s\n", "SAND");
     if (surface == CRUSHED_STONE)
@@ -112,8 +103,7 @@ void   print_surface(enum Surface_type surface)
         printf("%s\n", "ASHPALT");
 }
 
-enum Surface_type find_surface(char *str)     //tested
-{
+enum Surface_type find_surface(char *str) {    // tested
     if (strcmp(str, "ASHPALT") == 0)
         return ASHPALT;
     if (strcmp(str, "CONCRETE") == 0)
@@ -124,8 +114,7 @@ enum Surface_type find_surface(char *str)     //tested
     return SAND;
 }
 
-enum Road_quality find_quality(char *str)
-{
+enum Road_quality find_quality(char *str) {
     if (strcmp(str, "EXCELLENT") == 0)
         return EXCELLENT;
     if (strcmp(str, "GOOD") == 0)

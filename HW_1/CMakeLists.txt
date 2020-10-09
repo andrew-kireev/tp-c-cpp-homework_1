@@ -10,9 +10,9 @@ find_package(Threads REQUIRED)
 
 set(DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-set(INC_DIR ${DIR}/include)
+set(INC_DIR ${DIR}/project/include)
 
-set(SRC_DIR ${DIR}/src)
+set(SRC_DIR ${DIR}/project/src)
 
 set(TESTS_DIR ${DIR}/tests)
 
