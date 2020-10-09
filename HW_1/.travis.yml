@@ -1,0 +1,29 @@
+dist: trusty
+sudo: required
+
+language: c
+
+os:
+  - linux
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    packages:
+      - cmake
+      - valgrind
+      - cppcheck
+      - gcovr
+
+before_script:
+  - cmake CMakeLists.txt
+  - make
+
+script:
+  - ./linters/run.sh --local
+  - valgrind --track-origins=yes --leak-check=full ./tests
+  - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
+  - gcovr -r .
+
