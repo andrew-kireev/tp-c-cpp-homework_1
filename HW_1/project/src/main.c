@@ -38,9 +38,9 @@ int main() {
     size_t n;
     procces_input(&n);
     printf("%zu", n);
-    Road_Information road_info[n];
-    filling_struct(road_info, n);
+    Road_Information information[100];
+    filling_struct(information, n);
 
-    print_quality(find_road_quality(road_info, n));
+    print_quality(find_road_quality(information, n));
     return 0;
 }
