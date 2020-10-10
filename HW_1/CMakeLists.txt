@@ -3,10 +3,16 @@ project(HW_1)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_FLAGS "-Wall -Wextra -Werror")
+
+set(CMAKE_C_FLAGS "-g -Wall -Werror -Wpedantic -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "-lgcov --coverage")
+
+#set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -lm -fprofile-arcs -ftest-coverage -lgcov")
 
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
+
+
 
 set(DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
