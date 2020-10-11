@@ -13,17 +13,21 @@ void procces_input(size_t* n) {
     }
 }
 
-void filling_struct(Road_Information* roads, size_t num) {
+int filling_struct(Road_Information* roads, size_t num) {
     printf("%s\n", "Введите информацию о дороге: длинну, качество дороги, "
                    "тип дорожного полотна и число полос");
     for (size_t i = 0; i != num; i++) {
         char surface[10];
         char quality[10];
         printf("Введите информацию о %zu дороге\n", i);
-        scanf("%zd", &roads[i].road_len);
-        scanf("%s", quality);
-        scanf("%s", surface);
-        scanf("%zu", &roads[i].road_lines_num);
+        if (!scanf("%zd", &roads[i].road_len))
+            return 1;
+        if (!scanf("%s", quality))
+            return 1;
+        if (!scanf("%s", surface))
+            return 1;
+        if (!scanf("%zu", &roads[i].road_lines_num))
+            return 1;
         roads[i].surface = find_surface(surface);
         roads[i].quality = find_quality(quality);
         printf("len = %zu\n", roads[i].road_len);
@@ -31,15 +35,16 @@ void filling_struct(Road_Information* roads, size_t num) {
         print_surface(roads[i].surface);
         printf("lines = %zu\n", roads[i].road_lines_num);
     }
+    return 0;
 }
 
 int main() {
     printf("%s\n", "Введите количество дорог");
     size_t n;
     procces_input(&n);
-    printf("%zu", n);
     Road_Information information[100];
-    filling_struct(information, n);
+    if (filling_struct(information, n) == 1)
+        return 1;
 
     print_quality(find_road_quality(information, n));
     return 0;

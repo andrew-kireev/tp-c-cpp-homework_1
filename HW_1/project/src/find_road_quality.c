@@ -110,7 +110,6 @@ enum Surface_type find_surface(char *str) {    // tested
         return CONCRETE;
     if (strcmp(str, "CRUSHED_STONE") == 0)
         return CRUSHED_STONE;
-//    if (strcmp(str, "SAND") == 0)
     return SAND;
 }
 
@@ -123,7 +122,6 @@ enum Road_quality find_quality(char *str) {
         return NORMAL;
     if (strcmp(str, "BAD") == 0)
         return BAD;
-//    if (strcmp(str, "TERRIBLE") == 0)
     return TERRIBLE;
 }
 
