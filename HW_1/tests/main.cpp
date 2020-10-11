@@ -11,60 +11,60 @@ extern "C" {
 //evaluate_road_quality
 
 TEST(evaluate_road_quality, evaluate_road_quality_test1) {
-    ASSERT_EQ(80, evaluate_road_quality(EXCELLENT));
+    EXPECT_EQ(80, evaluate_road_quality(EXCELLENT));
 }
 
 TEST(evaluate_road_quality, evaluate_road_quality_test2) {
-    ASSERT_EQ(60, evaluate_road_quality(GOOD));
+    EXPECT_EQ(60, evaluate_road_quality(GOOD));
 }
 
 //evaluate_road_surface
 
 TEST(evaluate_road_surface, evaluate_road_surface_test1) {
-    ASSERT_EQ(15, evaluate_road_surface(CONCRETE));
+    EXPECT_EQ(15, evaluate_road_surface(CONCRETE));
 }
 
 TEST(evaluate_road_surface, evaluate_road_surface_test2) {
-    ASSERT_EQ(-35, evaluate_road_surface(CRUSHED_STONE));
+    EXPECT_EQ(-35, evaluate_road_surface(CRUSHED_STONE));
 }
 
 //evaluate_road_len
 
 TEST(evaluate_road_len, evaluate_road_len_test1) {
-    ASSERT_EQ(20, evaluate_road_len(300));
+    EXPECT_EQ(20, evaluate_road_len(300));
 }
 
 TEST(evaluate_road_len, evaluate_road_len_test2) {
-    ASSERT_EQ(10, evaluate_road_len(110));
+    EXPECT_EQ(10, evaluate_road_len(110));
 }
 
 TEST(evaluate_road_len, evaluate_road_len_test3) {
-    ASSERT_EQ(-10, evaluate_road_len(10));
+    EXPECT_EQ(-10, evaluate_road_len(10));
 }
 
 //evaluate_amount_lines
 
 TEST(evaluate_amount_lines, evaluate_amount_lines_test1) {
-    ASSERT_EQ(5, evaluate_amount_lines(3));
+    EXPECT_EQ(5, evaluate_amount_lines(3));
 }
 
 TEST(evaluate_amount_lines, evaluate_amount_lines_test2) {
-    ASSERT_EQ(-5, evaluate_amount_lines(1));
+    EXPECT_EQ(-5, evaluate_amount_lines(1));
 }
 
 //final_quality
 
 TEST(final_quality, final_quality_test1) {
-    ASSERT_EQ(EXCELLENT, final_quality(81));
+    EXPECT_EQ(EXCELLENT, final_quality(81));
 }
 
 TEST(final_quality, final_quality_test2) {
-    ASSERT_EQ(TERRIBLE, final_quality(20));
+    EXPECT_EQ(TERRIBLE, final_quality(20));
 }
 
 
 TEST(final_quality, final_quality_test3) {
-    ASSERT_EQ(TERRIBLE, final_quality(-20));
+    EXPECT_EQ(TERRIBLE, final_quality(-20));
 }
 
 //rate_road
@@ -77,7 +77,7 @@ TEST(rate_road, rate_road_test1) {
     road.road_len = 110;
     road.road_lines_num = 1;
 
-    ASSERT_EQ(45, rate_road(road));
+    EXPECT_EQ(45, rate_road(road));
 
     Road_Information road1;
 
@@ -86,7 +86,7 @@ TEST(rate_road, rate_road_test1) {
     road1.road_len = 500;
     road1.road_lines_num = 5;
 
-    ASSERT_EQ(45, rate_road(road1));
+    EXPECT_EQ(45, rate_road(road1));
 
     Road_Information road2;
 
@@ -95,7 +95,7 @@ TEST(rate_road, rate_road_test1) {
     road2.road_len = 500;
     road2.road_lines_num = 8;
 
-    ASSERT_EQ(35, rate_road(road2));
+    EXPECT_EQ(35, rate_road(road2));
 
     Road_Information road3;
 
@@ -104,7 +104,7 @@ TEST(rate_road, rate_road_test1) {
     road3.road_len = 100;
     road3.road_lines_num = 2;
 
-    ASSERT_EQ(-5, rate_road(road3));
+    EXPECT_EQ(-5, rate_road(road3));
 }
 
 //find_road_qality
@@ -135,7 +135,7 @@ TEST(find_road_quality, find_road_quality_test1) {
 
     enum Road_quality quality = find_road_quality(road, 4);
 
-    ASSERT_EQ(BAD, quality);
+    EXPECT_EQ(BAD, quality);
 }
 
 
@@ -163,7 +163,7 @@ TEST(find_road_quality, find_road_quality_test2) {
     road[3].road_len = 100;
     road[3].road_lines_num = 2;
     enum Road_quality quality = find_road_quality(road, 4);
-    ASSERT_EQ(BAD, quality);
+    EXPECT_EQ(BAD, quality);
 }
 
 TEST(find_road_quality, find_road_quality_test3) {
@@ -191,7 +191,7 @@ TEST(find_road_quality, find_road_quality_test3) {
     road[3].road_lines_num = 2;
 
     enum Road_quality quality = find_road_quality(road, 4);
-    ASSERT_EQ(EXCELLENT, quality);
+    EXPECT_EQ(EXCELLENT, quality);
 }
 
 
@@ -201,25 +201,25 @@ TEST(find_surface, find_surface_test1) {
 
     enum Surface_type surface = find_surface(str1);
 
-    ASSERT_EQ(ASHPALT, surface);
+    EXPECT_EQ(ASHPALT, surface);
 
     char str2[] = "CONCRETE";
 
     surface = find_surface(str2);
 
-    ASSERT_EQ(CONCRETE, surface);
+    EXPECT_EQ(CONCRETE, surface);
 
     char str3[] = "CRUSHED_STONE";
 
     surface = find_surface(str3);
 
-    ASSERT_EQ(CRUSHED_STONE, surface);
+    EXPECT_EQ(CRUSHED_STONE, surface);
 
     char str4[] = "SAND";
 
     surface = find_surface(str4);
 
-    ASSERT_EQ(SAND, surface);
+    EXPECT_EQ(SAND, surface);
 }
 
 TEST(find_quality, find_quality_test1) {
@@ -228,25 +228,25 @@ TEST(find_quality, find_quality_test1) {
 
     enum Road_quality quality = find_quality(str1);
 
-    ASSERT_EQ(EXCELLENT, quality);
+    EXPECT_EQ(EXCELLENT, quality);
 
     char str2[] = "GOOD";
 
     quality = find_quality(str2);
 
-    ASSERT_EQ(GOOD, quality);
+    EXPECT_EQ(GOOD, quality);
 
     char str3[] = "NORMAL";
 
     quality = find_quality(str3);
 
-    ASSERT_EQ(NORMAL, quality);
+    EXPECT_EQ(NORMAL, quality);
 
     char str4[] = "TERRIBLE";
 
     quality = find_quality(str4);
 
-    ASSERT_EQ(TERRIBLE, quality);
+    EXPECT_EQ(TERRIBLE, quality);
 }
 
 int main(int argc, char **argv) {
