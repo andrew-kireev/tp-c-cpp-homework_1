@@ -34,4 +34,5 @@ script:
   - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
   - cd "${TRAVIS_BUILD_DIR}"
   - gcovr -r ..
+  - bash <(curl -s https://codecov.io/bash)
 
