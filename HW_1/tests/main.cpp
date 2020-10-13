@@ -10,9 +10,13 @@ extern "C" {
 
 //evaluate_road_quality
 
+//Проверка соответствия качества дороги EXCELLENT рейтингу 80
+
 TEST(evaluate_road_quality, evaluate_road_quality_test1) {
     EXPECT_EQ(80, evaluate_road_quality(EXCELLENT));
 }
+
+//Проверка соответствия качества дороги GOOD рейтингу 60
 
 TEST(evaluate_road_quality, evaluate_road_quality_test2) {
     EXPECT_EQ(60, evaluate_road_quality(GOOD));
@@ -20,9 +24,13 @@ TEST(evaluate_road_quality, evaluate_road_quality_test2) {
 
 //evaluate_road_surface
 
+//Проверка соответствия полотна дороги CONCRETE рейтингу 15
+
 TEST(evaluate_road_surface, evaluate_road_surface_test1) {
     EXPECT_EQ(15, evaluate_road_surface(CONCRETE));
 }
+
+//Проверка соответствия полотна дороги CRUSHED_STONE рейтингу -15
 
 TEST(evaluate_road_surface, evaluate_road_surface_test2) {
     EXPECT_EQ(-35, evaluate_road_surface(CRUSHED_STONE));
@@ -30,13 +38,19 @@ TEST(evaluate_road_surface, evaluate_road_surface_test2) {
 
 //evaluate_road_len
 
+//Проверка соответсивя длины дороги 300 рейтингку 20
+
 TEST(evaluate_road_len, evaluate_road_len_test1) {
     EXPECT_EQ(20, evaluate_road_len(300));
 }
 
+//Проверка соответсивя длины дороги 110 рейтингку 10
+
 TEST(evaluate_road_len, evaluate_road_len_test2) {
     EXPECT_EQ(10, evaluate_road_len(110));
 }
+
+//Проверка соответсивя длины дороги 10 рейтингку -10
 
 TEST(evaluate_road_len, evaluate_road_len_test3) {
     EXPECT_EQ(-10, evaluate_road_len(10));
@@ -44,9 +58,13 @@ TEST(evaluate_road_len, evaluate_road_len_test3) {
 
 //evaluate_amount_lines
 
+//Проверка соответсивя количества полос 3 рейтину 5
+
 TEST(evaluate_amount_lines, evaluate_amount_lines_test1) {
     EXPECT_EQ(5, evaluate_amount_lines(3));
 }
+
+//Проверка соответсивя количества полос 1 рейтину -5
 
 TEST(evaluate_amount_lines, evaluate_amount_lines_test2) {
     EXPECT_EQ(-5, evaluate_amount_lines(1));
@@ -54,20 +72,27 @@ TEST(evaluate_amount_lines, evaluate_amount_lines_test2) {
 
 //final_quality
 
+//Проверка соответсвия рейтинга 81 качеству EXCELLENT
+
 TEST(final_quality, final_quality_test1) {
     EXPECT_EQ(EXCELLENT, final_quality(81));
 }
+
+//Проверка соответсвия рейтинга 20 качеству TERRIBLE
 
 TEST(final_quality, final_quality_test2) {
     EXPECT_EQ(TERRIBLE, final_quality(20));
 }
 
+//Проверка соответсвия рейтинга -20 качеству TERRIBLE
 
 TEST(final_quality, final_quality_test3) {
     EXPECT_EQ(TERRIBLE, final_quality(-20));
 }
 
 //rate_road
+
+//Тест оценки дорог с различными параметрами
 
 TEST(rate_road, rate_road_test1) {
     Road_Information road;
@@ -109,6 +134,8 @@ TEST(rate_road, rate_road_test1) {
 
 //find_road_qality
 
+//Тест проверящий массив дорог со средним рейтингом BAD
+
 TEST(find_road_quality, find_road_quality_test1) {
     Road_Information road[4];
 
@@ -138,6 +165,7 @@ TEST(find_road_quality, find_road_quality_test1) {
     EXPECT_EQ(BAD, quality);
 }
 
+//Тест проверящий массив дорог со средним рейтингом BAD
 
 TEST(find_road_quality, find_road_quality_test2) {
     Road_Information road[4];
@@ -165,6 +193,8 @@ TEST(find_road_quality, find_road_quality_test2) {
     enum Road_quality quality = find_road_quality(road, 4);
     EXPECT_EQ(BAD, quality);
 }
+
+//Тест проверящий массив дорог со средним рейтингом EXCELLENT
 
 TEST(find_road_quality, find_road_quality_test3) {
     Road_Information road[4];
@@ -194,6 +224,7 @@ TEST(find_road_quality, find_road_quality_test3) {
     EXPECT_EQ(EXCELLENT, quality);
 }
 
+//Проверка функции определения дорожного полотна по одноименной строке
 
 TEST(find_surface, find_surface_test1) {
 
@@ -221,6 +252,8 @@ TEST(find_surface, find_surface_test1) {
 
     EXPECT_EQ(SAND, surface);
 }
+
+//Проверка функции определения качества дороги по одноименной строке
 
 TEST(find_quality, find_quality_test1) {
 
