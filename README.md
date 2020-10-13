@@ -1,6 +1,7 @@
 # tp-c-cpp-homework_1
 
-https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1.svg?branch=developing_hw1
+.. image:: https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1.svg?branch=developing_hw1
+    :target: https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1
 
 Вариант #12
 Создать структуру для хранения информации о дорожной сети: протяженности дорог, виде дорожного полотна, 
