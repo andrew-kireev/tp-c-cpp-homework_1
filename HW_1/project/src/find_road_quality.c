@@ -79,30 +79,6 @@ enum Road_quality find_road_quality(Road_Information* roads, size_t num) {    //
     return final_quality(rating / num);
 }
 
-void   print_quality(enum Road_quality quality) {
-    if (quality == EXCELLENT)
-        printf("%s\n", "EXCELLENT");
-    if (quality == GOOD)
-        printf("%s\n", "GOOD");
-    if (quality == NORMAL)
-        printf("%s\n", "NORMAL");
-    if (quality == BAD)
-        printf("%s\n", "BAD");
-    if (quality == TERRIBLE)
-        printf("%s\n", "TERRIBLE");
-}
-
-void   print_surface(enum Surface_type surface) {
-    if (surface == SAND)
-        printf("%s\n", "SAND");
-    if (surface == CRUSHED_STONE)
-        printf("%s\n", "CRUSHED_STONE");
-    if (surface == CONCRETE)
-        printf("%s\n", "CONCRETE");
-    if (surface == ASHPALT)
-        printf("%s\n", "ASHPALT");
-}
-
 enum Surface_type find_surface(char *str) {    // tested
     if (strcmp(str, "ASHPALT") == 0)
         return ASHPALT;

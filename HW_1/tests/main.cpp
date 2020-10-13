@@ -38,33 +38,39 @@ TEST(evaluate_road_surface, evaluate_road_surface_test2) {
 
 //evaluate_road_len
 
-//Проверка соответсивя длины дороги 300 рейтингку 20
+//Проверка соответствия длины дороги 300 рейтингу 20
 
 TEST(evaluate_road_len, evaluate_road_len_test1) {
     EXPECT_EQ(20, evaluate_road_len(300));
 }
 
-//Проверка соответсивя длины дороги 110 рейтингку 10
+//Проверка соответствия длины дороги 110 рейтингу 10
 
 TEST(evaluate_road_len, evaluate_road_len_test2) {
     EXPECT_EQ(10, evaluate_road_len(110));
 }
 
-//Проверка соответсивя длины дороги 10 рейтингку -10
+//Проверка соответствия длины дороги 10 рейтингу -10
 
 TEST(evaluate_road_len, evaluate_road_len_test3) {
     EXPECT_EQ(-10, evaluate_road_len(10));
 }
 
+//Проверка соответствия длины дороги 80 рейтингу
+
+TEST(evaluate_road_len, evaluate_road_len_test4) {
+    EXPECT_EQ(0, evaluate_road_len(80));
+}
+
 //evaluate_amount_lines
 
-//Проверка соответсивя количества полос 3 рейтину 5
+//Проверка соответствия количества полос 3 рейтингу 5
 
 TEST(evaluate_amount_lines, evaluate_amount_lines_test1) {
     EXPECT_EQ(5, evaluate_amount_lines(3));
 }
 
-//Проверка соответсивя количества полос 1 рейтину -5
+//Проверка соответствия количества полос 1 рейтингу -5
 
 TEST(evaluate_amount_lines, evaluate_amount_lines_test2) {
     EXPECT_EQ(-5, evaluate_amount_lines(1));
@@ -72,22 +78,34 @@ TEST(evaluate_amount_lines, evaluate_amount_lines_test2) {
 
 //final_quality
 
-//Проверка соответсвия рейтинга 81 качеству EXCELLENT
+//Проверка соответствия рейтинга 81 качеству EXCELLENT
 
 TEST(final_quality, final_quality_test1) {
     EXPECT_EQ(EXCELLENT, final_quality(81));
 }
 
-//Проверка соответсвия рейтинга 20 качеству TERRIBLE
+//Проверка соответствия рейтинга 20 качеству TERRIBLE
 
 TEST(final_quality, final_quality_test2) {
     EXPECT_EQ(TERRIBLE, final_quality(20));
 }
 
-//Проверка соответсвия рейтинга -20 качеству TERRIBLE
+//Проверка соответствия рейтинга -20 качеству TERRIBLE
 
 TEST(final_quality, final_quality_test3) {
     EXPECT_EQ(TERRIBLE, final_quality(-20));
+}
+
+//Проверка соответствия рейтинга 65 качеству GOOD
+
+TEST(final_quality, final_quality_test4) {
+    EXPECT_EQ(GOOD, final_quality(65));
+}
+
+//Проверка соответствия рейтинга 45 качеству NORMAL
+
+TEST(final_quality, final_quality_test5) {
+    EXPECT_EQ(NORMAL, final_quality(45));
 }
 
 //rate_road
@@ -280,6 +298,12 @@ TEST(find_quality, find_quality_test1) {
     quality = find_quality(str4);
 
     EXPECT_EQ(TERRIBLE, quality);
+
+    char str5[] = "BAD";
+
+    quality = find_quality(str5);
+
+    EXPECT_EQ(BAD, quality);
 }
 
 int main(int argc, char **argv) {
