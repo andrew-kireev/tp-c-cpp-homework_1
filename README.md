@@ -1,6 +1,6 @@
 # tp-c-cpp-homework_1
 
-[![Build Status](https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1.svg?branch=main)](
+[![Build Status](https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1.svg?branch=developing_hw1)](
 https://travis-ci.com/andrew-kireev/tp-c-cpp-homework_1)
 
 
