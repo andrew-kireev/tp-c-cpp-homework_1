@@ -12,7 +12,6 @@ Matrix* input_matrix() {
 
     int *data = (int*)malloc(sizeof(int) * size * size);
 
-
     int k = 0;
     for (int i = 0; i != size; ++i) {
         for (int j = 0; j != size; ++j) {

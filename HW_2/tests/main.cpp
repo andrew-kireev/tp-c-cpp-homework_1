@@ -21,6 +21,7 @@ TEST(calculate_matrix, test1_calculate_matrix) {
 
     EXPECT_EQ(15, calculate_matrix(&matrix).main_diagonal);
     EXPECT_EQ(10, calculate_matrix(&matrix).side_diagonal);
+
 }
 
 TEST(calculate_matrix, test2_calculate_matrix) {
@@ -59,6 +60,13 @@ TEST(read_file, test1_read_file) {
 
     EXPECT_EQ(true, is_equal);
 
+
+    Calculation_res res = calculate_matrix(matrix);
+    EXPECT_EQ(15, res.main_diagonal);
+    EXPECT_EQ(16, res.side_diagonal);
+
+    free(matrix->data);
+    free(matrix);
 }
 
 TEST(read_file, test2_read_file) {
@@ -82,6 +90,10 @@ TEST(read_file, test2_read_file) {
 
     EXPECT_EQ(true, is_equal);
 
+    Calculation_res res = calculate_matrix(matrix);
+    EXPECT_EQ(5, res.main_diagonal);
+    EXPECT_EQ(5, res.side_diagonal);
+    print_matrix(matrix);
 }
 
 
