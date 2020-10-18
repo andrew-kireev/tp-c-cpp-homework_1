@@ -21,5 +21,6 @@ typedef struct {
 void print_matrix(Matrix* matrix);
 Matrix* input_matrix();
 Calculation_res calculate_matrix(Matrix* matrix);
+Matrix* read_file(const char* file_name);
 
 #endif //HW_1_UTILS_H

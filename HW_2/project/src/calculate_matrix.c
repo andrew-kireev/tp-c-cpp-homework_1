@@ -54,6 +54,41 @@ void print_matrix(Matrix* matrix) {
     }
 }
 
-Matrix* read_file(char* file) {
-    int fd = open
+Matrix* read_file(const char* file_name) {
+    FILE* file;
+
+    file = fopen(file_name, "r");
+    if (file == NULL)
+        return NULL;
+
+    Matrix* matrix;
+    if (!(matrix = (Matrix*)malloc(sizeof(matrix) * 1))) {
+        fclose(file);
+        return NULL;
+    }
+
+    if (fscanf(file, "%zu", &matrix->size) != 1) {
+        fclose(file);
+        return NULL;
+    }
+
+    if (!(matrix->data = (int*)malloc(sizeof(int) * matrix->size * matrix->size))) {
+        fclose(file);
+        return NULL;
+    }
+
+    int n = matrix->size;
+    for (size_t i = 0; i != n; ++i) {
+        for (size_t j = 0; j != n; ++j) {
+            if (fscanf(file, "%d", &matrix->data[i*n+j]) != 1) {
+                free(matrix->data);
+                free(matrix);
+                fclose(file);
+                return NULL;
+            }
+        }
+    }
+
+    fclose(file);
+    return matrix;
 }

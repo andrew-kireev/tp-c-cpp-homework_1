@@ -15,6 +15,7 @@ find_package(Threads REQUIRED)
 
 
 set(DIR ${CMAKE_CURRENT_SOURCE_DIR})
+add_definitions(-DSOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(INC_DIR ${DIR}/project/include)
 
@@ -25,7 +26,7 @@ set(TESTS_DIR ${DIR}/tests)
 include_directories("${GTEST_INCLUDE_DIRS}")
 include_directories(include)
 
-if(FALSE)
+if(TRUE)
     add_executable(TEST
             tests/main.cpp
             ${SRC_DIR}/calculate_matrix.c

@@ -3,6 +3,7 @@
 //
 
 #include <gtest/gtest.h>
+#include <string>
 
 extern "C" {
     #include "utils.h"
@@ -33,6 +34,54 @@ TEST(calculate_matrix, test2_calculate_matrix) {
 
     EXPECT_EQ(0, calculate_matrix(&matrix).main_diagonal);
     EXPECT_EQ(1, calculate_matrix(&matrix).side_diagonal);
+}
+
+TEST(read_file, test1_read_file) {
+
+    std::vector<int> test = {4, 5, 4, 3,
+                             6, 3, 5, 3,
+                             5, 3, 5, 2,
+                             5, 3, 5, 3};
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/test1");
+    bool is_equal = true;
+    int size = matrix->size;
+    int k = 0;
+    for (int i = 0; i != size; ++i) {
+        for (int j = 0; j != size; ++j) {
+            if (test[k] != matrix->data[i*size+j]) {
+                is_equal = false;
+                break;
+            }
+            k++;
+        }
+    }
+
+    EXPECT_EQ(true, is_equal);
+
+}
+
+TEST(read_file, test2_read_file) {
+
+    std::vector<int> test = {1, 2,
+                             3, 4};
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/test2");
+    bool is_equal = true;
+    int size = matrix->size;
+    int k = 0;
+    for (int i = 0; i != size; ++i) {
+        for (int j = 0; j != size; ++j) {
+            if (test[k] != matrix->data[i*size+j]) {
+                is_equal = false;
+                break;
+            }
+            k++;
+        }
+    }
+
+    EXPECT_EQ(true, is_equal);
+
 }
 
 
