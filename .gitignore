@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 #CMake files
-cmake-build-debug/
+HW_2/cmake-build-debug/
 
 #CLion files
 .idea/
