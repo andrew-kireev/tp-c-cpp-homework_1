@@ -3,7 +3,10 @@
 //
 
 #include "utils.h"
+#include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/mman.h>
 
 Matrix* input_matrix() {
     int size;
@@ -91,3 +94,69 @@ Matrix* read_file(const char* file_name) {
     fclose(file);
     return matrix;
 }
+
+int create_forks(int num) {
+    int pid;
+
+    for (int i = 0; i != num; ++i) {
+        if ((pid = fork()) == -1)
+            return -1;
+        if (pid == 0)
+            return i;
+    }
+    return -5;          // Код parent процесса, нужно будет потом добавить enum;
+}
+
+Calculation_res *create_shared_memory() {
+    size_t page_size = getpagesize();
+
+    Calculation_res *shared_memory = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
+                               MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+
+    if (!shared_memory) {
+        return NULL;
+    }
+    shared_memory->main_diagonal = 0;
+    shared_memory->side_diagonal = 0;
+    return shared_memory;
+}
+
+
+Calculation_res* multi_process(char* file_name, int num_forks) {
+    Matrix* matrix;
+    matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test2");
+
+    Calculation_res *res;
+
+    if ((res = create_shared_memory()) == NULL)
+        return NULL;
+
+    int process_number;
+    if ((process_number = create_forks(num_forks)) == -1)
+        return NULL;
+
+    if (process_number != -5)
+        calculate_multi_proc(matrix, res, num_forks);
+
+    while(wait(0) > 0) { /* no-op */ ; }
+
+    printf("main diagonal = %d\n", res->main_diagonal);
+    printf("main diagonal = %d\n", res->side_diagonal);
+    return res;
+}
+
+int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number) {
+    int n = matrix->size;
+
+    for (int i = proc_number; i != n; ++i) {
+        for (int j = 0; j != n; ++j) {
+            if (i == j)
+                res->main_diagonal += matrix->data[i*n+j];
+            if (n == i + j + 1)
+                res->side_diagonal += matrix->data[i*n+j];
+        }
+    }
+//    exit(0);
+    return 0;
+}
+

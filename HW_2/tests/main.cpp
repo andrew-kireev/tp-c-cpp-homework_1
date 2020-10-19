@@ -97,6 +97,17 @@ TEST(read_file, test2_read_file) {
 }
 
 
+TEST(multi_process, test_1_multi_process) {
+
+    char file_name[] = "/tests/test2";
+
+    Calculation_res* res = multi_process(file_name, 4);
+
+    EXPECT_EQ(5, res->main_diagonal);
+    EXPECT_EQ(5, res->side_diagonal);
+}
+
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
