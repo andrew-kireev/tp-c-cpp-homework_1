@@ -99,12 +99,12 @@ TEST(read_file, test2_read_file) {
 
 TEST(multi_process, test_1_multi_process) {
 
-    char file_name[] = "/tests/test2";
+    char file_name[] = "/tests/test1";
 
     Calculation_res* res = multi_process(file_name, 4);
 
-    EXPECT_EQ(5, res->main_diagonal);
-    EXPECT_EQ(5, res->side_diagonal);
+    EXPECT_EQ(15, res->main_diagonal);
+    EXPECT_EQ(16, res->side_diagonal);
 }
 
 

@@ -22,9 +22,9 @@ void print_matrix(Matrix* matrix);
 Matrix* input_matrix();
 Calculation_res calculate_matrix(Matrix* matrix);
 Matrix* read_file(const char* file_name);
-int create_forks(int num);
+int create_forks(int num, int *pids);
 Calculation_res *create_shared_memory();
 Calculation_res* multi_process(char* file_name, int num_forks);
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number);
+int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount);
 
 #endif //HW_1_UTILS_H

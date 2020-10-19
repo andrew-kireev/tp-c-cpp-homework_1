@@ -95,14 +95,16 @@ Matrix* read_file(const char* file_name) {
     return matrix;
 }
 
-int create_forks(int num) {
+int create_forks(int num, int *pids) {
     int pid;
 
     for (int i = 0; i != num; ++i) {
         if ((pid = fork()) == -1)
             return -1;
-        if (pid == 0)
+        if (pid == 0) {
+            pids[i] = pid;
             return i;
+        }
     }
     return -5;          // Код parent процесса, нужно будет потом добавить enum;
 }
@@ -124,31 +126,41 @@ Calculation_res *create_shared_memory() {
 
 Calculation_res* multi_process(char* file_name, int num_forks) {
     Matrix* matrix;
-    matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test2");
+    matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test1");
 
     Calculation_res *res;
 
-    if ((res = create_shared_memory()) == NULL)
+    int *pids = (int*)malloc(sizeof(int) * num_forks);
+
+    if ((res = create_shared_memory()) == NULL) {
+        free(pids);
         return NULL;
+    }
 
     int process_number;
-    if ((process_number = create_forks(num_forks)) == -1)
+    if (num_forks > matrix->size)
+        num_forks = matrix->size;
+    if ((process_number = create_forks(num_forks, pids)) == -1)
         return NULL;
 
     if (process_number != -5)
-        calculate_multi_proc(matrix, res, num_forks);
+        calculate_multi_proc(matrix, res, process_number, num_forks);
 
-    while(wait(0) > 0) { /* no-op */ ; }
+    for (int i = 0; i < num_forks; i++) {
+        while (waitpid(pids[i], NULL, 0) > 0);
+    }
 
     printf("main diagonal = %d\n", res->main_diagonal);
     printf("main diagonal = %d\n", res->side_diagonal);
     return res;
 }
 
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number) {
+int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount){
     int n = matrix->size;
 
-    for (int i = proc_number; i != n; ++i) {
+    printf("proc_number = %d\n", proc_number);
+    printf("proc_number + (n / procs_amount) = %d\n", procs_amount);
+    for (int i = proc_number; i != proc_number + (n / procs_amount); ++i) {
         for (int j = 0; j != n; ++j) {
             if (i == j)
                 res->main_diagonal += matrix->data[i*n+j];
@@ -156,7 +168,9 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number) 
                 res->side_diagonal += matrix->data[i*n+j];
         }
     }
-//    exit(0);
+    printf("main diagonal = %d\n", res->main_diagonal);
+    printf("main diagonal = %d\n", res->side_diagonal);
+    exit(0);
     return 0;
 }
 
