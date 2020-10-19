@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <string>
+#include <sys/mman.h>
 
 extern "C" {
     #include "utils.h"
@@ -93,7 +94,9 @@ TEST(read_file, test2_read_file) {
     Calculation_res res = calculate_matrix(matrix);
     EXPECT_EQ(5, res.main_diagonal);
     EXPECT_EQ(5, res.side_diagonal);
-    print_matrix(matrix);
+//    print_matrix(matrix);
+    free(matrix->data);
+    free(matrix);
 }
 
 
@@ -105,6 +108,40 @@ TEST(multi_process, test_1_multi_process) {
 
     EXPECT_EQ(15, res->main_diagonal);
     EXPECT_EQ(16, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, test_4_multi_process) {
+
+    char file_name[] = "/tests/test1";
+
+    Calculation_res* res = multi_process(file_name, 50);
+
+    EXPECT_EQ(15, res->main_diagonal);
+    EXPECT_EQ(16, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, test_2_multi_process) {
+
+    char file_name[] = "/tests/test1";
+
+    Calculation_res* res = multi_process(file_name, 1);
+
+    EXPECT_EQ(15, res->main_diagonal);
+    EXPECT_EQ(16, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, test_3_multi_process) {
+
+    char file_name[] = "/tests/test1";
+
+    Calculation_res* res = multi_process(file_name, 10);
+
+    EXPECT_EQ(15, res->main_diagonal);
+    EXPECT_EQ(16, res->side_diagonal);
+    munmap(res, getpagesize());
 }
 
 

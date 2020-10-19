@@ -64,17 +64,19 @@ Matrix* read_file(const char* file_name) {
         return NULL;
 
     Matrix* matrix;
-    if (!(matrix = (Matrix*)malloc(sizeof(matrix) * 1))) {
+    if (!(matrix = (Matrix*)malloc(sizeof(Matrix) * 1))) {
         fclose(file);
         return NULL;
     }
 
     if (fscanf(file, "%zu", &matrix->size) != 1) {
+        free(matrix);
         fclose(file);
         return NULL;
     }
 
     if (!(matrix->data = (int*)malloc(sizeof(int) * matrix->size * matrix->size))) {
+        free(matrix);
         fclose(file);
         return NULL;
     }
@@ -106,7 +108,7 @@ int create_forks(int num, int *pids) {
             return i;
         }
     }
-    return -5;          // Код parent процесса, нужно будет потом добавить enum;
+    return PARENT_PID;          // Код parent процесса, нужно будет потом добавить enum;
 }
 
 Calculation_res *create_shared_memory() {
@@ -130,36 +132,48 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
 
     Calculation_res *res;
 
+    if (num_forks > matrix->size)
+        num_forks = matrix->size;
     int *pids = (int*)malloc(sizeof(int) * num_forks);
+    for (int i = 0; i != num_forks; ++i)
+        pids[i] = 0;
 
     if ((res = create_shared_memory()) == NULL) {
+        free(matrix->data);
+        free(matrix);
         free(pids);
         return NULL;
     }
 
     int process_number;
-    if (num_forks > matrix->size)
-        num_forks = matrix->size;
-    if ((process_number = create_forks(num_forks, pids)) == -1)
+    if ((process_number = create_forks(num_forks, pids)) == -1) {
+        free(matrix->data);
+        free(matrix);
+        free(pids);
         return NULL;
+    }
 
-    if (process_number != -5)
+    if (process_number != PARENT_PID)
         calculate_multi_proc(matrix, res, process_number, num_forks);
 
     for (int i = 0; i < num_forks; i++) {
         while (waitpid(pids[i], NULL, 0) > 0);
     }
 
-    printf("main diagonal = %d\n", res->main_diagonal);
-    printf("main diagonal = %d\n", res->side_diagonal);
+    free(matrix->data);
+    free(matrix);
+    free(pids);
+//    printf("main diagonal = %d\n", res->main_diagonal);
+//    printf("main diagonal = %d\n", res->side_diagonal);
+
     return res;
 }
 
 int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount){
     int n = matrix->size;
 
-    printf("proc_number = %d\n", proc_number);
-    printf("proc_number + (n / procs_amount) = %d\n", procs_amount);
+//    printf("proc_number = %d\n", proc_number);
+//    printf("proc_number + (n / procs_amount) = %d\n", procs_amount);
     for (int i = proc_number; i != proc_number + (n / procs_amount); ++i) {
         for (int j = 0; j != n; ++j) {
             if (i == j)
@@ -168,9 +182,8 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
                 res->side_diagonal += matrix->data[i*n+j];
         }
     }
-    printf("main diagonal = %d\n", res->main_diagonal);
-    printf("main diagonal = %d\n", res->side_diagonal);
+//    printf("main diagonal = %d\n", res->main_diagonal);
+//    printf("main diagonal = %d\n", res->side_diagonal);
     exit(0);
-    return 0;
 }
 

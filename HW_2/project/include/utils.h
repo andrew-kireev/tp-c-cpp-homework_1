@@ -8,14 +8,16 @@
 #include <stdio.h>
 
 typedef struct {
-    size_t size;
+    _Atomic size_t size;
     int *data;
 } Matrix;
 
 typedef struct {
-    int main_diagonal;
-    int side_diagonal;
+    _Atomic int main_diagonal;
+    _Atomic int side_diagonal;
 } Calculation_res;
+
+# define PARENT_PID -5
 
 
 void print_matrix(Matrix* matrix);
