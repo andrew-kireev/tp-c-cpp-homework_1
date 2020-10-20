@@ -128,7 +128,7 @@ Calculation_res *create_shared_memory() {
 
 Calculation_res* multi_process(char* file_name, int num_forks) {
     Matrix* matrix;
-    matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test1");
+    matrix = read_file(file_name);
 
     Calculation_res *res;
 
@@ -173,8 +173,19 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
     int n = matrix->size;
 
 //    printf("proc_number = %d\n", proc_number);
-//    printf("proc_number + (n / procs_amount) = %d\n", procs_amount);
-    for (int i = proc_number; i != proc_number + (n / procs_amount); ++i) {
+//    printf("\tproc_amount = %d\n", procs_amount);
+//    printf("\tproc_number + (n / procs_amount) = %d\n", procs_amount);
+
+    int rest = (int)(proc_number + 1) * (int)(n / procs_amount);
+//    printf("\trest = %d\n", rest);
+    if (proc_number + 1 == procs_amount) {
+        rest = matrix->size;
+    }
+
+//    printf("\trest = %d\n", rest);
+//    printf("\ti = %d\n", (int)proc_number * (int)(n / procs_amount));
+
+    for (int i = (int)proc_number * (int)(n / procs_amount); i != rest; ++i) {
         for (int j = 0; j != n; ++j) {
             if (i == j)
                 res->main_diagonal += matrix->data[i*n+j];
@@ -182,8 +193,8 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
                 res->side_diagonal += matrix->data[i*n+j];
         }
     }
-//    printf("main diagonal = %d\n", res->main_diagonal);
-//    printf("main diagonal = %d\n", res->side_diagonal);
+//    printf("\tmain diagonal = %d\n", res->main_diagonal);
+//    printf("\tmain diagonal = %d\n", res->side_diagonal);
     exit(0);
 }
 

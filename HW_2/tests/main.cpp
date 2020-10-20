@@ -75,7 +75,7 @@ TEST(read_file, test2_read_file) {
     std::vector<int> test = {1, 2,
                              3, 4};
 
-    Matrix* matrix = read_file(SOURCE_DIR"/tests/test2");
+    Matrix* matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test2");
     bool is_equal = true;
     int size = matrix->size;
     int k = 0;
@@ -94,7 +94,6 @@ TEST(read_file, test2_read_file) {
     Calculation_res res = calculate_matrix(matrix);
     EXPECT_EQ(5, res.main_diagonal);
     EXPECT_EQ(5, res.side_diagonal);
-//    print_matrix(matrix);
     free(matrix->data);
     free(matrix);
 }
@@ -102,46 +101,42 @@ TEST(read_file, test2_read_file) {
 
 TEST(multi_process, test_1_multi_process) {
 
-    char file_name[] = "/tests/test1";
+    char file_name[] = "/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/5";
 
-    Calculation_res* res = multi_process(file_name, 4);
+    Calculation_res* res = multi_process(file_name, 5);
 
-    EXPECT_EQ(15, res->main_diagonal);
-    EXPECT_EQ(16, res->side_diagonal);
+    EXPECT_EQ(32, res->main_diagonal);
+    EXPECT_EQ(14, res->side_diagonal);
     munmap(res, getpagesize());
 }
 
 TEST(multi_process, test_4_multi_process) {
 
-    char file_name[] = "/tests/test1";
+    char file_name[] = "/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/7";
 
-    Calculation_res* res = multi_process(file_name, 50);
+    Calculation_res* res = multi_process(file_name, 2);
 
-    EXPECT_EQ(15, res->main_diagonal);
-    EXPECT_EQ(16, res->side_diagonal);
+    EXPECT_EQ(24, res->main_diagonal);
+    EXPECT_EQ(42, res->side_diagonal);
     munmap(res, getpagesize());
-}
 
-TEST(multi_process, test_2_multi_process) {
+    Calculation_res* res2 = multi_process(file_name, 2);
 
-    char file_name[] = "/tests/test1";
+    EXPECT_EQ(24, res2->main_diagonal);
+    EXPECT_EQ(42, res2->side_diagonal);
+    munmap(res2, getpagesize());
 
-    Calculation_res* res = multi_process(file_name, 1);
+    Calculation_res* res3 = multi_process(file_name, 3);
 
-    EXPECT_EQ(15, res->main_diagonal);
-    EXPECT_EQ(16, res->side_diagonal);
-    munmap(res, getpagesize());
-}
+    EXPECT_EQ(24, res3->main_diagonal);
+    EXPECT_EQ(42, res3->side_diagonal);
+    munmap(res3, getpagesize());
 
-TEST(multi_process, test_3_multi_process) {
+    Calculation_res* res4 = multi_process(file_name, 50);
 
-    char file_name[] = "/tests/test1";
-
-    Calculation_res* res = multi_process(file_name, 10);
-
-    EXPECT_EQ(15, res->main_diagonal);
-    EXPECT_EQ(16, res->side_diagonal);
-    munmap(res, getpagesize());
+    EXPECT_EQ(24, res4->main_diagonal);
+    EXPECT_EQ(42, res4->side_diagonal);
+    munmap(res3, getpagesize());
 }
 
 

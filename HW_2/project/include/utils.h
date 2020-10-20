@@ -8,13 +8,13 @@
 #include <stdio.h>
 
 typedef struct {
-    _Atomic size_t size;
+    size_t size;
     int *data;
 } Matrix;
 
 typedef struct {
-    _Atomic int main_diagonal;
-    _Atomic int side_diagonal;
+    int main_diagonal;
+    int side_diagonal;
 } Calculation_res;
 
 # define PARENT_PID -5
