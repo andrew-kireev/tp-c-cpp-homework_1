@@ -1,8 +1,8 @@
 //
-// Created by Andrew Kireev on 18.10.2020.
+// Created by Andrew Kireev on 20.10.2020.
 //
 
-#include "utils.h"
+#include "multi/multi_process_utils.h"
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -26,24 +26,6 @@ Matrix* input_matrix() {
     matrix->size = size;
     matrix->data = data;
     return matrix;
-}
-
-Calculation_res calculate_matrix(Matrix* matrix) {
-    Calculation_res res;
-    int n = matrix->size;
-
-    res.main_diagonal = 0;
-    res.side_diagonal = 0;
-
-    for (int i = 0; i != n; ++i) {
-        for (int j = 0; j != n; ++j) {
-            if (i == j)
-                res.main_diagonal += matrix->data[i*n+j];
-            if (n == i + j + 1)
-                res.side_diagonal += matrix->data[i*n+j];
-        }
-    }
-    return res;
 }
 
 void print_matrix(Matrix* matrix) {
@@ -115,7 +97,7 @@ Calculation_res *create_shared_memory() {
     size_t page_size = getpagesize();
 
     Calculation_res *shared_memory = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
-                               MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+                                          MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
     if (!shared_memory) {
         return NULL;
@@ -197,4 +179,3 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
 //    printf("\tmain diagonal = %d\n", res->side_diagonal);
     exit(0);
 }
-

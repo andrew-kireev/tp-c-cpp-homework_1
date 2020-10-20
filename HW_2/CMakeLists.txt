@@ -24,28 +24,45 @@ set(SRC_DIR ${DIR}/project/src)
 set(TESTS_DIR ${DIR}/tests)
 
 include_directories("${GTEST_INCLUDE_DIRS}")
-include_directories(include)
+include_directories(project/include)
+
+add_library(one_process STATIC
+        ${SRC_DIR}/one/calculate_matrix.c
+        ${INC_DIR}/one/utils.h)
+
+add_library(multi_process SHARED
+        ${SRC_DIR}/multi/mult_proc_calculate_matrix.c
+        ${INC_DIR}/multi/multi_process_utils.h)
 
 if(TRUE)
-    add_executable(TEST
-            tests/main.cpp
-            ${SRC_DIR}/calculate_matrix.c
-            ${INC_DIR}/utils.h
-            )
+    add_executable(TEST_ONE
+            tests/test_one_process.cpp)
 
-    target_include_directories(TEST PUBLIC ${INC_DIR})
+    target_include_directories(TEST_ONE PUBLIC ${INC_DIR})
 
-    target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads)
+    target_link_libraries(TEST_ONE ${GTEST_LIBRARIES} Threads::Threads one_process)
+
+    add_executable(TEST_MULTI
+            tests/test_multi_proc.cpp)
+
+    target_include_directories(TEST_MULTI PUBLIC ${INC_DIR})
+
+    target_link_libraries(TEST_MULTI ${GTEST_LIBRARIES} Threads::Threads multi_process)
 
 
     enable_testing()
-    add_test(NAME TEST COMMAND tests)
+    add_test(NAME TEST_ONE COMMAND tests1)
+    add_test(NAME TEST_MULTI COMMAND tests2)
 else()
-    add_executable(HW_2
-            ${SRC_DIR}/main.c
-            ${SRC_DIR}/calculate_matrix.c
-            ${INC_DIR}/utils.h
-            )
+    add_executable(HW_2_ONE_PROC
+            ${SRC_DIR}/one/main.c)
 
-    target_include_directories(HW_2 PUBLIC ${INC_DIR})
+    add_executable(HW_2_MULTI_PROC
+            ${SRC_DIR}/multi/main.c)
+
+    target_link_libraries(HW_2_ONE_PROC one_process)
+    target_link_libraries(HW_2_MULTI_PROC multi_process)
+
+    target_include_directories(HW_2_ONE_PROC PUBLIC ${INC_DIR})
+    target_include_directories(HW_2_MULTI_PROC PUBLIC ${INC_DIR})
 endif()
