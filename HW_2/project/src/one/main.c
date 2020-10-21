@@ -7,7 +7,6 @@
 #include "one/utils.h"
 
 int main(int argc, char **argv) {
-
     Matrix* matrix = input_matrix();
 
     print_matrix(matrix);

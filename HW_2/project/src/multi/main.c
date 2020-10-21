@@ -7,7 +7,6 @@
 #include "multi/multi_process_utils.h"
 
 int main(int argc, char **argv) {
-
     Calculation_res *res = create_shared_memory();
 
 //    create_forks(4 0);

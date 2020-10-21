@@ -8,35 +8,6 @@
 #include <unistd.h>
 #include <sys/mman.h>
 
-Matrix* input_matrix() {
-    int size;
-
-    scanf("%d", &size);
-
-    int *data = (int*)malloc(sizeof(int) * size * size);
-
-    int k = 0;
-    for (int i = 0; i != size; ++i) {
-        for (int j = 0; j != size; ++j) {
-            scanf("%d", &data[k]);
-            ++k;
-        }
-    }
-    Matrix *matrix = (Matrix*)malloc(sizeof(matrix) * 1);
-    matrix->size = size;
-    matrix->data = data;
-    return matrix;
-}
-
-void print_matrix(Matrix* matrix) {
-    int n = matrix->size;
-    for (int i = 0; i != n; ++i) {
-        for (int j = 0; j != n; ++j) {
-            printf("%d ", matrix->data[i*n+j]);
-        }
-        printf("%c", '\n');
-    }
-}
 
 Matrix* read_file(const char* file_name) {
     FILE* file;
@@ -86,9 +57,9 @@ int create_forks(int num, int *pids) {
         if ((pid = fork()) == -1)
             return -1;
         if (pid == 0) {
-            pids[i] = pid;
             return i;
         }
+        pids[i] = pid;
     }
     return PARENT_PID;          // Код parent процесса, нужно будет потом добавить enum;
 }
@@ -139,7 +110,7 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
         calculate_multi_proc(matrix, res, process_number, num_forks);
 
     for (int i = 0; i < num_forks; i++) {
-        while (waitpid(pids[i], NULL, 0) > 0);
+        while (waitpid(pids[i], NULL, 0) > 0) {}
     }
 
     free(matrix->data);
@@ -151,7 +122,7 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
     return res;
 }
 
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount){
+int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount) {
     int n = matrix->size;
 
 //    printf("proc_number = %d\n", proc_number);

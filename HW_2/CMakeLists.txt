@@ -35,24 +35,16 @@ add_library(multi_process SHARED
         ${INC_DIR}/multi/multi_process_utils.h)
 
 if(TRUE)
-    add_executable(TEST_ONE
+    add_executable(TEST
             tests/test_one_process.cpp)
 
-    target_include_directories(TEST_ONE PUBLIC ${INC_DIR})
+    target_include_directories(TEST PUBLIC ${INC_DIR})
 
-    target_link_libraries(TEST_ONE ${GTEST_LIBRARIES} Threads::Threads one_process)
-
-    add_executable(TEST_MULTI
-            tests/test_multi_proc.cpp)
-
-    target_include_directories(TEST_MULTI PUBLIC ${INC_DIR})
-
-    target_link_libraries(TEST_MULTI ${GTEST_LIBRARIES} Threads::Threads multi_process)
+    target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
 
 
     enable_testing()
     add_test(NAME TEST_ONE COMMAND tests1)
-    add_test(NAME TEST_MULTI COMMAND tests2)
 else()
     add_executable(HW_2_ONE_PROC
             ${SRC_DIR}/one/main.c)
