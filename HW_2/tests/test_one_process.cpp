@@ -12,6 +12,8 @@ extern "C" {
 }
 
 
+
+
 TEST(calculate_matrix, test1_calculate_matrix) {
     int mas[] = {5, 3, 4,
                  2, 4, 2,
@@ -71,89 +73,194 @@ TEST(read_file, test1_read_file) {
     free(matrix);
 }
 
-//TEST(read_file, test2_read_file) {
-//
-//    std::vector<int> test = {1, 2,
-//                             3, 4};
-//
-//    Matrix* matrix = read_file(SOURCE_DIR"tests/test2");
-//    bool is_equal = true;
-//    int size = matrix->size;
-//    int k = 0;
-//    for (int i = 0; i != size; ++i) {
-//        for (int j = 0; j != size; ++j) {
-//            if (test[k] != matrix->data[i*size+j]) {
-//                is_equal = false;
-//                break;
-//            }
-//            k++;
-//        }
-//    }
-//
-//    EXPECT_EQ(true, is_equal);
-//
-//    Calculation_res res = calculate_matrix(matrix);
-//    EXPECT_EQ(5, res.main_diagonal);
-//    EXPECT_EQ(5, res.side_diagonal);
-//    free(matrix->data);
-//    free(matrix);
-//}
+TEST(read_file, test2_read_file) {
+
+    std::vector<int> test = {1, 2,
+                             3, 4};
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/test2");
+    bool is_equal = true;
+    int size = matrix->size;
+    int k = 0;
+    for (int i = 0; i != size; ++i) {
+        for (int j = 0; j != size; ++j) {
+            if (test[k] != matrix->data[i*size+j]) {
+                is_equal = false;
+                break;
+            }
+            k++;
+        }
+    }
+
+    EXPECT_EQ(true, is_equal);
+
+    Calculation_res res = calculate_matrix(matrix);
+    EXPECT_EQ(5, res.main_diagonal);
+    EXPECT_EQ(5, res.side_diagonal);
+    free(matrix->data);
+    free(matrix);
+}
 
 
-//TEST(multi_process, test_1_multi_process) {
-//
-//    char file_name[] = "/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/5";
-//
-//    Calculation_res* res = multi_process(file_name, 5);
-//
-//    EXPECT_EQ(32, res->main_diagonal);
-//    EXPECT_EQ(14, res->side_diagonal);
-//    munmap(res, getpagesize());
-//}
-//
-//TEST(multi_process, test_4_multi_process) {
-//
-//    char file_name[] = "/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/7";
-//
-//    Calculation_res* res = multi_process(file_name, 2);
-//
-//    EXPECT_EQ(24, res->main_diagonal);
-//    EXPECT_EQ(42, res->side_diagonal);
-//    munmap(res, getpagesize());
-//
-//    Calculation_res* res2 = multi_process(file_name, 2);
-//
-//    EXPECT_EQ(24, res2->main_diagonal);
-//    EXPECT_EQ(42, res2->side_diagonal);
-//    munmap(res2, getpagesize());
-//
-//    Calculation_res* res3 = multi_process(file_name, 3);
-//
-//    EXPECT_EQ(24, res3->main_diagonal);
-//    EXPECT_EQ(42, res3->side_diagonal);
-//    munmap(res3, getpagesize());
-//
-//    Calculation_res* res4 = multi_process(file_name, 50);
-//
-//    EXPECT_EQ(24, res4->main_diagonal);
-//    EXPECT_EQ(42, res4->side_diagonal);
-//    munmap(res3, getpagesize());
-//}
+TEST(multi_process, test_1_multi_process) {
+
+    char file_name[] = SOURCE_DIR"/tests/5";
+
+    Calculation_res* res = multi_process(file_name, 5);
+
+    EXPECT_EQ(32, res->main_diagonal);
+    EXPECT_EQ(14, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, test_4_multi_process) {
+
+    char file_name[] = SOURCE_DIR"/tests/7";
+
+    Calculation_res* res = multi_process(file_name, 2);
+
+    EXPECT_EQ(24, res->main_diagonal);
+    EXPECT_EQ(42, res->side_diagonal);
+    munmap(res, getpagesize());
+
+    Calculation_res* res2 = multi_process(file_name, 2);
+
+    EXPECT_EQ(24, res2->main_diagonal);
+    EXPECT_EQ(42, res2->side_diagonal);
+    munmap(res2, getpagesize());
+
+    Calculation_res* res3 = multi_process(file_name, 3);
+
+    EXPECT_EQ(24, res3->main_diagonal);
+    EXPECT_EQ(42, res3->side_diagonal);
+    munmap(res3, getpagesize());
+
+    Calculation_res* res4 = multi_process(file_name, 50);
+
+    EXPECT_EQ(24, res4->main_diagonal);
+    EXPECT_EQ(42, res4->side_diagonal);
+    munmap(res3, getpagesize());
+}
 
 
-TEST(multi_process, compare_algotithms_test1) {
+TEST(multi_process, compare) {
 
-    char file_name[] = SOURCE_DIR"tests/size_10";
+    char file_name[] = SOURCE_DIR"/tests/size_10";
 
-    Calculation_res* multi_proc_res = multi_process(file_name, 2);
+    Calculation_res* res = multi_process(file_name, 5);
 
-    Matrix* matrix = read_file(SOURCE_DIR"tests/size_10");
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_10");
 
-    Calculation_res one_proc_res = calculate_matrix(matrix);
+    Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(one_proc_res.main_diagonal, multi_proc_res->main_diagonal);
-    EXPECT_EQ(one_proc_res.side_diagonal, multi_proc_res->side_diagonal);
-    munmap(multi_proc_res, getpagesize());
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare2) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_23";
+
+    Calculation_res* res = multi_process(file_name, 4);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_23");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare3) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_123";
+
+    Calculation_res* res = multi_process(file_name, 12);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_123");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare4) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_200";
+
+    Calculation_res* res = multi_process(file_name, 20);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_200");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare5) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_555";
+
+    Calculation_res* res = multi_process(file_name, 11);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_555");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare6) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_777";
+
+    Calculation_res* res = multi_process(file_name, 23);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_777");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare7) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_1333";
+
+    Calculation_res* res = multi_process(file_name, 113);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1333");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
+}
+
+TEST(multi_process, compare8) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_1777";
+
+    Calculation_res* res = multi_process(file_name, 100);
+
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1777");
+
+    Calculation_res res2 = calculate_matrix(matrix);
+
+    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    munmap(res, getpagesize());
 }
 
 
