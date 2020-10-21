@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-g++ generate_matrix.cpp -o generator
+g++ -std=c++11 generate_matrix.cpp -o generator
 ./generator size_10 10
 ./generator size_23 23
 ./generator size_123 123
