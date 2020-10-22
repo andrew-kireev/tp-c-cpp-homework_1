@@ -4,13 +4,13 @@ sudo: required
 language: c
 
 os:
-  - linux
+  - osx
 
 compiler:
-  - gcc
+  - clang
 
 addons:
-  apt:
+  homebrew:
     packages:
       - cmake
       - valgrind
