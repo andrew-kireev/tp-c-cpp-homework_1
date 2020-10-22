@@ -19,10 +19,10 @@ addons:
       - gcovr
 
 before_script:
-  - sudo homebrew install -y libgtest-dev
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt && sudo make
-  - sudo cp *.a /usr/lib
+#  - sudo homebrew install -y libgtest-dev
+#  - cd /usr/src/gtest
+#  - sudo cmake CMakeLists.txt && sudo make
+#  - sudo cp *.a /usr/lib
   - cd "${TRAVIS_BUILD_DIR}"
   - cd HW_2
   - cd tests
