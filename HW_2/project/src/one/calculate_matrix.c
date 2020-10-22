@@ -11,18 +11,22 @@
 Matrix* input_matrix() {
     int size;
 
-    scanf("%d", &size);
+    if (scanf("%d", &size) != 1)
+        return NULL;
 
     int *data = (int*)malloc(sizeof(int) * size * size);
 
     int k = 0;
     for (int i = 0; i != size; ++i) {
         for (int j = 0; j != size; ++j) {
-            scanf("%d", &data[k]);
+            if (scanf("%d", &data[k]) != 1) {
+                free(data);
+                return NULL;
+            }
             ++k;
         }
     }
-    Matrix *matrix = (Matrix*)malloc(sizeof(matrix) * 1);
+    Matrix *matrix = (Matrix*)malloc(sizeof(Matrix) * 1);
     matrix->size = size;
     matrix->data = data;
     return matrix;
