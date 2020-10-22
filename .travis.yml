@@ -24,8 +24,12 @@ before_script:
 #  - cd /usr/src/gtest
 #  - sudo cmake CMakeLists.txt && sudo make
 #  - sudo cp *.a /usr/lib
-  - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
-  - brew install valgrind
+  - git clone git://sourceware.org/git/valgrind.git
+  - cd valgrind
+  - ./autogen.sh
+  - ./configure
+  - make
+  - sudo make install
   - git clone https://github.com/google/googletest
   - cd googletest
   - mkdir build
