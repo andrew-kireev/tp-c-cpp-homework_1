@@ -230,11 +230,11 @@ TEST(multi_process, compare5) {
 
 TEST(multi_process, compare6) {
 
-    char file_name[] = SOURCE_DIR"/tests/size_777";
+    char file_name[] = SOURCE_DIR"/tests/size_666";
 
     Calculation_res* res = multi_process(file_name, 23);
 
-    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_777");
+    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_666");
 
     Calculation_res res2 = calculate_matrix(matrix);
 
