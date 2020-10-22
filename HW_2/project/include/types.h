@@ -12,8 +12,8 @@ typedef struct {
 } Matrix;
 
 typedef struct {
-    _Atomic int main_diagonal;
-    _Atomic int side_diagonal;
+    int main_diagonal;
+    int side_diagonal;
 } Calculation_res;
 
 #endif //HW_2_TYPES_H
