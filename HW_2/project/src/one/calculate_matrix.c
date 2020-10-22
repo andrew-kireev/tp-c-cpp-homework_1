@@ -20,9 +20,9 @@ Calculation_res calculate_matrix(Matrix* matrix) {
         res.side_diagonal += matrix->side_diagonal[i];
     }
 
-    free(matrix->main_diagonal);
-    free(matrix->side_diagonal);
-    free(matrix);
+//    free(matrix->main_diagonal);
+//    free(matrix->side_diagonal);
+//    free(matrix);
     return res;
 }
 

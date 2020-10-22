@@ -24,5 +24,9 @@ int main(int argc, char **argv) {
     printf("res_main = %d\n", res.main_diagonal);
     printf("res_side = %d\n", res.side_diagonal);
 
+    free(matrix->side_diagonal);
+    free(matrix->main_diagonal);
+    free(matrix);
+
     return 0;
 }

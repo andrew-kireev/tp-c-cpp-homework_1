@@ -45,9 +45,17 @@ if(TRUE)
 
     target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
 
+    add_executable(TEST_VALGRIND
+            tests/tests_for_valgrind.cpp)
+
+    target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
+
+    target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+
 
     enable_testing()
     add_test(NAME TEST_ONE COMMAND tests1)
+    add_test(NAME TEST_VALGRIND COMMAND tests2)
 else()
     add_executable(HW_2_ONE_PROC
             ${SRC_DIR}/one/main.c)

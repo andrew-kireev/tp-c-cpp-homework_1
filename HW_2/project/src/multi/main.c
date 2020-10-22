@@ -12,6 +12,6 @@ int main(int argc, char **argv) {
     printf("main diagonal = %d\n", res->main_diagonal);
     printf("side diagonal = %d\n", res->side_diagonal);
 
-
+    munmap(res, getpagesize());
     return 0;
 }
