@@ -86,6 +86,8 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
 
     Calculation_res *res;
 
+    if (matrix == NULL)
+        return NULL;
     if (num_forks > matrix->size)
         num_forks = matrix->size;
     int *pids = (int*)malloc(sizeof(int) * num_forks);
