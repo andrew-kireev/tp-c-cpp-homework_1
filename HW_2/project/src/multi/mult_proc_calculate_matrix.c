@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <sys/wait.h>
 
 
 Matrix* read_file(const char* file_name) {
