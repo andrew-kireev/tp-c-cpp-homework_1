@@ -9,7 +9,7 @@ g++ -std=c++11 generate_matrix.cpp -o generator
 ./generator size_666 666
 ./generator size_1333 1333
 ./generator size_1777 1777
-./generator size_10000 10000
+./generator size_5000 5000
 
 ./generator size_20 20
 ./generator size_30 30
