@@ -36,6 +36,7 @@ Matrix* read_file(const char* file_name) {
     }
 
     if (!(matrix->side_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
+        free(matrix->main_diagonal);
         free(matrix);
         fclose(file);
         return NULL;

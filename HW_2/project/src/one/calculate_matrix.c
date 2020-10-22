@@ -19,6 +19,10 @@ Calculation_res calculate_matrix(Matrix* matrix) {
         res.main_diagonal += matrix->main_diagonal[i];
         res.side_diagonal += matrix->side_diagonal[i];
     }
+
+    free(matrix->main_diagonal);
+    free(matrix->side_diagonal);
+    free(matrix);
     return res;
 }
 
@@ -48,6 +52,7 @@ Matrix* read_file(const char* file_name) {
     }
 
     if (!(matrix->side_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
+        free(matrix->main_diagonal);
         free(matrix);
         fclose(file);
         return NULL;
@@ -80,6 +85,7 @@ Matrix* read_file(const char* file_name) {
         matrix->side_diagonal[k_side++] = tmp_one_row[n - i - 1];
     }
 
+    free(tmp_one_row);
     fclose(file);
     return matrix;
 }
