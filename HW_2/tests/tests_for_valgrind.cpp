@@ -66,7 +66,7 @@ TEST(multi_process, compare4) {
 TEST(multi_process, compare5) {
     char file_name[] = SOURCE_DIR"/tests/size_40";
 
-    Calculation_res* res = multi_process(file_name, 10);
+    Calculation_res* res = multi_process(file_name, 5);
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_40");
 
