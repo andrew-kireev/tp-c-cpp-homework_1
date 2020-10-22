@@ -3,6 +3,7 @@
 //
 
 #include "one/utils.h"
+#include "types.h"
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,13 +17,13 @@ Calculation_res calculate_matrix(Matrix* matrix) {
     res.side_diagonal = 0;
 
     for (int i = 0; i != n; ++i) {
-        for (int j = 0; j != n; ++j) {
-            if (i == j)
-                res.main_diagonal += matrix->data[i*n+j];
-            if (n == i + j + 1)
-                res.side_diagonal += matrix->data[i*n+j];
-        }
+        res.main_diagonal += matrix->main_diagonal[i];
+        res.side_diagonal += matrix->side_diagonal[i];
     }
+
+//    free(matrix->main_diagonal);
+//    free(matrix->side_diagonal);
+//    free(matrix);
     return res;
 }
 
@@ -45,24 +46,47 @@ Matrix* read_file(const char* file_name) {
         return NULL;
     }
 
-    if (!(matrix->data = (int*)malloc(sizeof(int) * matrix->size * matrix->size))) {
+    if (!(matrix->main_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
+        free(matrix);
+        fclose(file);
+        return NULL;
+    }
+
+    if (!(matrix->side_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
+        free(matrix->main_diagonal);
+        free(matrix);
+        fclose(file);
+        return NULL;
+    }
+
+    int *tmp_one_row;
+    if (!(tmp_one_row = (int*)malloc(sizeof(int) * matrix->size))) {
+        free(matrix->main_diagonal);
+        free(matrix->side_diagonal);
         free(matrix);
         fclose(file);
         return NULL;
     }
 
     int n = matrix->size;
+    int k_main = 0;
+    int k_side = 0;
     for (size_t i = 0; i != n; ++i) {
         for (size_t j = 0; j != n; ++j) {
-            if (fscanf(file, "%d", &matrix->data[i*n+j]) != 1) {
-                free(matrix->data);
+            if (fscanf(file, "%d", &tmp_one_row[j]) != 1) {
+                free(tmp_one_row);
+                free(matrix->main_diagonal);
+                free(matrix->side_diagonal);
                 free(matrix);
                 fclose(file);
                 return NULL;
             }
         }
+        matrix->main_diagonal[k_main++] = tmp_one_row[i];
+        matrix->side_diagonal[k_side++] = tmp_one_row[n - i - 1];
     }
 
+    free(tmp_one_row);
     fclose(file);
     return matrix;
 }

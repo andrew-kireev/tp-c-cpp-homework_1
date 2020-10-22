@@ -4,8 +4,11 @@ project(HW_2)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_C_FLAGS "-Wall -Werror -pedantic  -fprofile-arcs -ftest-coverage")
-set(CMAKE_CXX_FLAGS "-Wall -Werror -pedantic  -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-Wall -Werror -pedantic -O3 -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -pedantic  -O3 -fprofile-arcs -ftest-coverage")
+
+#set(CMAKE_C_FLAGS "-Wall -Werror -O3")
+#set(CMAKE_CXX_FLAGS "-Wall -Werror -O3")
 
 #set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -lm -fprofile-arcs -ftest-coverage -lgcov")
 
@@ -42,9 +45,17 @@ if(TRUE)
 
     target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
 
+    add_executable(TEST_VALGRIND
+            tests/tests_for_valgrind.cpp)
+
+    target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
+
+    target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+
 
     enable_testing()
     add_test(NAME TEST_ONE COMMAND tests1)
+    add_test(NAME TEST_VALGRIND COMMAND tests2)
 else()
     add_executable(HW_2_ONE_PROC
             ${SRC_DIR}/one/main.c)

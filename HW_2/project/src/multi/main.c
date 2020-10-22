@@ -7,18 +7,11 @@
 #include "multi/multi_process_utils.h"
 
 int main(int argc, char **argv) {
-    Calculation_res *res = create_shared_memory();
+    Calculation_res *res = multi_process("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/test2", 2);
 
-//    create_forks(4 0);
+    printf("main diagonal = %d\n", res->main_diagonal);
+    printf("side diagonal = %d\n", res->side_diagonal);
 
-    printf("Создался поток%c", '\n');
-
-    res->main_diagonal++;
-    res->side_diagonal++;
-
-
-    printf("main_diagonal = %d\n", res->main_diagonal);
-    printf("side_diagonal = %d\n", res->side_diagonal);
-
+    munmap(res, getpagesize());
     return 0;
 }

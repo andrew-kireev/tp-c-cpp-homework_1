@@ -7,7 +7,8 @@
 
 typedef struct {
     size_t size;
-    int *data;
+    int *main_diagonal;
+    int *side_diagonal;
 } Matrix;
 
 typedef struct {
