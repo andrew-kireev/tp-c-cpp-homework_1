@@ -6,16 +6,23 @@
 #include <stdlib.h>
 #include "one/utils.h"
 
-int main(int argc, char **argv) {
-    Matrix* matrix = input_matrix();
 
-    print_matrix(matrix);
+
+int main(int argc, char **argv) {
+    Matrix* matrix = read_file("/Users/andrewkireev/Documents/GitHub/tp-c-cpp-homework_1/HW_2/tests/7");
+
+    for (int i = 0; i != matrix->size; ++i)
+        printf("%d ", matrix->main_diagonal[i]);
+    printf("%c", '\n');
+
+    for (int i = 0; i != matrix->size; ++i)
+        printf("%d ", matrix->side_diagonal[i]);
+    printf("%c", '\n');
 
     Calculation_res res = calculate_matrix(matrix);
-    printf("%d\n", res.main_diagonal);
-    printf("%d\n", res.side_diagonal);
 
-    free(matrix->data);
-    free(matrix);
+    printf("res_main = %d\n", res.main_diagonal);
+    printf("res_side = %d\n", res.side_diagonal);
+
     return 0;
 }
