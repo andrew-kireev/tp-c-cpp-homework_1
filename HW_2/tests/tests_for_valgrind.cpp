@@ -97,22 +97,22 @@ TEST(multi_process, compare6) {
     free(matrix);
 }
 
-TEST(multi_process, compare7) {
-    char file_name[] = SOURCE_DIR"/tests/size_60";
-
-    Calculation_res* res = multi_process(file_name, 5);
-
-    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_60");
-
-    Calculation_res res2 = calculate_matrix(matrix);
-
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
-    munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
-}
+//TEST(multi_process, compare7) {
+//    char file_name[] = SOURCE_DIR"/tests/size_60";
+//
+//    Calculation_res* res = multi_process(file_name, 5);
+//
+//    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_60");
+//
+//    Calculation_res res2 = calculate_matrix(matrix);
+//
+//    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
+//    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+//    munmap(res, getpagesize());
+//    free(matrix->side_diagonal);
+//    free(matrix->main_diagonal);
+//    free(matrix);
+//}
 
 
 int main(int argc, char **argv) {
