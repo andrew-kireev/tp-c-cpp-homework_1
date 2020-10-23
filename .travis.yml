@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 sudo: required
 
 language: c
@@ -6,19 +6,17 @@ language: c
 os:
   - linux
 
+compiler:
+  - gcc
 
 addons:
   apt:
     packages:
-      - gcc-8
       - cmake
       - valgrind
       - cppcheck
       - lcov
       - gcovr
-
-compiler:
-  - gcc-8
 
 before_script:
   - sudo apt-get install -y libgtest-dev
