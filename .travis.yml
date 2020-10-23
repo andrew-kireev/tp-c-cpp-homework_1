@@ -17,7 +17,6 @@ addons:
       - cppcheck
       - lcov
       - gcovr
-      - gtest
 
 before_script:
   - sudo homebrew install -y libgtest-dev
