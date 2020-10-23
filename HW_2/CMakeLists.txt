@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.9.2)
-project(HW_2)
+project(HW_2 C CXX)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_C_FLAGS "-Wall -Werror -pedantic -O3 -fprofile-arcs -ftest-coverage")
-set(CMAKE_CXX_FLAGS "-Wall -Werror -pedantic  -O3 -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-Wall -pedantic -O3 -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "-Wall -pedantic  -O3 -fprofile-arcs -ftest-coverage")
 
 #set(CMAKE_C_FLAGS "-Wall -Werror -O3")
 #set(CMAKE_CXX_FLAGS "-Wall -Werror -O3")

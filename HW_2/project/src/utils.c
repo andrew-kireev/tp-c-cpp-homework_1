@@ -58,3 +58,12 @@ Matrix* read_file(const char* file_name) {
     fclose(file);
     return matrix;
 }
+
+void free_matrix(Matrix* matrix) {
+    int n = matrix->size;
+
+    for (int i = 0; i != n; ++i)
+        free(matrix->matrix[i]);
+    free(matrix->matrix);
+    free(matrix);
+}

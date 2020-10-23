@@ -14,35 +14,35 @@ extern "C" {
 
 
 
-
-TEST(calculate_matrix, test1_calculate_matrix) {
-    int mas1[] = {5, 4, 6};
-
-    int mas2[] = {4, 4, 2};
-
-    Matrix matrix;
-    matrix.size = 3;
-    matrix.main_diagonal = mas1;
-    matrix.side_diagonal = mas2;
-
-    EXPECT_EQ(15, calculate_matrix(&matrix).main_diagonal);
-    EXPECT_EQ(10, calculate_matrix(&matrix).side_diagonal);
-
-}
-
-TEST(calculate_matrix, test2_calculate_matrix) {
-    int mas1[] = {0, 0, 0};
-
-    int mas2[] = {1, 0, 0};
-
-    Matrix matrix;
-    matrix.size = 3;
-    matrix.main_diagonal = mas1;
-    matrix.side_diagonal = mas2;
-
-    EXPECT_EQ(0, calculate_matrix(&matrix).main_diagonal);
-    EXPECT_EQ(1, calculate_matrix(&matrix).side_diagonal);
-}
+//
+//TEST(calculate_matrix, test1_calculate_matrix) {
+//    int mas1[] = {5, 4, 6};
+//
+//    int mas2[] = {4, 4, 2};
+//
+//    Matrix matrix;
+//    matrix.size = 3;
+//    matrix.main_diagonal = mas1;
+//    matrix.side_diagonal = mas2;
+//
+//    EXPECT_EQ(15, calculate_matrix(&matrix).main_diagonal);
+//    EXPECT_EQ(10, calculate_matrix(&matrix).side_diagonal);
+//
+//}
+//
+//TEST(calculate_matrix, test2_calculate_matrix) {
+//    int mas1[] = {0, 0, 0};
+//
+//    int mas2[] = {1, 0, 0};
+//
+//    Matrix matrix;
+//    matrix.size = 3;
+//    matrix.main_diagonal = mas1;
+//    matrix.side_diagonal = mas2;
+//
+//    EXPECT_EQ(0, calculate_matrix(&matrix).main_diagonal);
+//    EXPECT_EQ(1, calculate_matrix(&matrix).side_diagonal);
+//}
 
 //TEST(read_file, test1_read_file) {
 //
@@ -156,9 +156,7 @@ TEST(multi_process, compare) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare2) {
@@ -174,9 +172,7 @@ TEST(multi_process, compare2) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare3) {
@@ -192,9 +188,7 @@ TEST(multi_process, compare3) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare4) {
@@ -210,9 +204,7 @@ TEST(multi_process, compare4) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare5) {
@@ -228,9 +220,7 @@ TEST(multi_process, compare5) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare6) {
@@ -246,9 +236,7 @@ TEST(multi_process, compare6) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare7) {
@@ -264,9 +252,7 @@ TEST(multi_process, compare7) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare8) {
@@ -282,9 +268,7 @@ TEST(multi_process, compare8) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 TEST(multi_process, compare9) {
@@ -300,9 +284,7 @@ TEST(multi_process, compare9) {
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
     EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
     munmap(res, getpagesize());
-    free(matrix->side_diagonal);
-    free(matrix->main_diagonal);
-    free(matrix);
+    free_matrix(matrix);
 }
 
 

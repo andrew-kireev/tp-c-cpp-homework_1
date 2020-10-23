@@ -54,18 +54,14 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
         pids[i] = 0;
 
     if ((res = create_shared_memory()) == NULL) {
-        free(matrix->main_diagonal);
-        free(matrix->side_diagonal);
-        free(matrix);
+        free_matrix(matrix);
         free(pids);
         return NULL;
     }
 
     int process_number;
     if ((process_number = create_forks(num_forks, pids)) == -1) {
-        free(matrix->main_diagonal);
-        free(matrix->side_diagonal);
-        free(matrix);
+        free_matrix(matrix);
         free(pids);
         return NULL;
     }
@@ -78,9 +74,7 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
         while (waitpid(pids[i], NULL, 0) > 0) {}
     }
 
-    free(matrix->main_diagonal);
-    free(matrix->side_diagonal);
-    free(matrix);
+    free_matrix(matrix);
     free(pids);
 //    printf("main diagonal = %d\n", res->main_diagonal);
 //    printf("main diagonal = %d\n", res->side_diagonal);
@@ -105,9 +99,12 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
 //    printf("\ti = %d\n", (int)proc_number * (int)(n / procs_amount));
 
     for (int i = (int)proc_number * (int)(n / procs_amount); i != rest; ++i) {
-        res->main_diagonal += matrix->main_diagonal[i];
-
-        res->side_diagonal += matrix->side_diagonal[i];
+        for (int j = 0; j != n; ++j) {
+            if (i == j)
+                res->main_diagonal += matrix->matrix[i][j];
+            if (n == i + j + 1)
+                res->side_diagonal += matrix->matrix[i][j];
+        }
     }
 //    printf("\tmain diagonal = %d\n", res->main_diagonal);
 //    printf("\tside diagonal = %d\n", res->side_diagonal);

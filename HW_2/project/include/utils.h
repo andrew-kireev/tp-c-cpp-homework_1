@@ -13,10 +13,11 @@ typedef struct {
 } Matrix;
 
 typedef struct {
-    int main_diagonal;
-    int side_diagonal;
+    _Atomic int main_diagonal;
+    _Atomic int side_diagonal;
 } Calculation_res;
 
 Matrix* read_file(const char* file_name);
+void free_matrix(Matrix* matrix);
 
 #endif //HW_2_UTILS_H
