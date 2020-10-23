@@ -34,38 +34,35 @@ add_library(one_process STATIC
         ${INC_DIR}/one/utils.h)
 
 add_library(multi_process SHARED
-        ${SRC_DIR}/multi/mult_proc_calculate_matrix.c
-        ${INC_DIR}/multi/multi_process_utils.h)
+${SRC_DIR}/multi/mult_proc_calculate_matrix.c
+${INC_DIR}/multi/multi_process_utils.h)
 
-if(TRUE)
-    add_executable(TEST
-            tests/test_one_process.cpp)
+add_executable(TEST
+    tests/test_one_process.cpp)
 
-    target_include_directories(TEST PUBLIC ${INC_DIR})
+target_include_directories(TEST PUBLIC ${INC_DIR})
 
-    target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
 
-    add_executable(TEST_VALGRIND
-            tests/tests_for_valgrind.cpp)
+add_executable(TEST_VALGRIND
+    tests/tests_for_valgrind.cpp)
 
-    target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
+target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
 
-    target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
 
 
-    enable_testing()
-    add_test(NAME TEST_ONE COMMAND tests1)
-    add_test(NAME TEST_VALGRIND COMMAND tests2)
-else()
-    add_executable(HW_2_ONE_PROC
-            ${SRC_DIR}/one/main.c)
+enable_testing()
+add_test(NAME TEST_ONE COMMAND tests1)
+add_test(NAME TEST_VALGRIND COMMAND tests2)
+add_executable(HW_2_ONE_PROC
+    ${SRC_DIR}/one/main.c)
 
-    add_executable(HW_2_MULTI_PROC
-            ${SRC_DIR}/multi/main.c)
+add_executable(HW_2_MULTI_PROC
+    ${SRC_DIR}/multi/main.c)
 
-    target_link_libraries(HW_2_ONE_PROC one_process)
-    target_link_libraries(HW_2_MULTI_PROC multi_process)
+target_link_libraries(HW_2_ONE_PROC one_process)
+target_link_libraries(HW_2_MULTI_PROC multi_process)
 
-    target_include_directories(HW_2_ONE_PROC PUBLIC ${INC_DIR})
-    target_include_directories(HW_2_MULTI_PROC PUBLIC ${INC_DIR})
-endif()
+target_include_directories(HW_2_ONE_PROC PUBLIC ${INC_DIR})
+target_include_directories(HW_2_MULTI_PROC PUBLIC ${INC_DIR})
