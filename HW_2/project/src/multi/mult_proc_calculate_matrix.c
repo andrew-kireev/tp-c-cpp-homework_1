@@ -65,7 +65,7 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
         free(pids);
         return NULL;
     }
-    printf("pid = %d\n", process_number);
+//    printf("pid = %d\n", process_number);
 
     if (process_number != PARENT_PID)
         calculate_multi_proc(matrix, res, process_number, num_forks);
