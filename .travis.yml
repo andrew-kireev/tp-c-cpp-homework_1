@@ -37,6 +37,7 @@ addons:
       - gcovr
 
 before_script:
+  - sudo apt install clang
   - sudo apt-get install -y libgtest-dev
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt && sudo make

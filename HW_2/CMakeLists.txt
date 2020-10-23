@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.9.2)
 project(HW_2 C CXX)
 
-set(CMAKE_C_COMPILER /usr/bin/clang)
-set(CMAKE_CXX_COMPILER /usr/bin/clang++)
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -48,14 +45,14 @@ add_executable(TEST
 
 target_include_directories(TEST PUBLIC ${INC_DIR})
 
-target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads pthread one_process multi_process)
 
 add_executable(TEST_VALGRIND
     tests/tests_for_valgrind.cpp)
 
 target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
 
-target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads one_process multi_process)
+target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads pthread one_process multi_process)
 
 
 enable_testing()
@@ -67,8 +64,8 @@ add_executable(HW_2_ONE_PROC
 add_executable(HW_2_MULTI_PROC
     ${SRC_DIR}/multi/main.c)
 
-target_link_libraries(HW_2_ONE_PROC one_process)
-target_link_libraries(HW_2_MULTI_PROC multi_process)
+target_link_libraries(HW_2_ONE_PROC pthread one_process)
+target_link_libraries(HW_2_MULTI_PROC pthread multi_process)
 
 target_include_directories(HW_2_ONE_PROC PUBLIC ${INC_DIR})
 target_include_directories(HW_2_MULTI_PROC PUBLIC ${INC_DIR})
