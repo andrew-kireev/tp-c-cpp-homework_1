@@ -10,7 +10,7 @@ compiler:
   - gcc
 
 addons:
-  homebrew:
+  apt:
     packages:
       - cmake
       - valgrind
