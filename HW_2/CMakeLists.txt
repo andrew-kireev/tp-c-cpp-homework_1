@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.9.2)
 project(HW_2 C CXX)
 
+set(CMAKE_C_COMPILER /usr/bin/clang)
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
