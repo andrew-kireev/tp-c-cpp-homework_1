@@ -30,12 +30,15 @@ include_directories("${GTEST_INCLUDE_DIRS}")
 include_directories(project/include)
 
 add_library(one_process STATIC
+        ${INC_DIR}/utils.h
         ${SRC_DIR}/one/calculate_matrix.c
-        ${INC_DIR}/one/utils.h)
+        ${SRC_DIR}/utils.c
+        ${INC_DIR}/one/one_proc_utils.h)
 
 add_library(multi_process SHARED
-${SRC_DIR}/multi/mult_proc_calculate_matrix.c
-${INC_DIR}/multi/multi_process_utils.h)
+        ${INC_DIR}/multi/multi_process_utils.h
+        ${SRC_DIR}/multi/mult_proc_calculate_matrix.c
+        ${SRC_DIR}/utils.c)
 
 add_executable(TEST
     tests/test_one_process.cpp)

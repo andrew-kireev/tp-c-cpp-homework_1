@@ -1,9 +1,11 @@
 //
-// Created by Andrew Kireev on 21.10.2020.
+// Created by Andrew Kireev on 23.10.2020.
 //
 
-#ifndef HW_2_TYPES_H
-#define HW_2_TYPES_H
+#ifndef HW_2_UTILS_H
+#define HW_2_UTILS_H
+
+#include <stdlib.h>
 
 typedef struct {
     size_t size;
@@ -16,4 +18,6 @@ typedef struct {
     int side_diagonal;
 } Calculation_res;
 
-#endif //HW_2_TYPES_H
+Matrix* read_file(const char* file_name);
+
+#endif //HW_2_UTILS_H
