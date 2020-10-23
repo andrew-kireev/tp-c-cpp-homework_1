@@ -4,10 +4,10 @@ sudo: required
 language: c
 
 os:
-  - osx
+  - linux
 
 compiler:
-  - clang
+  - gcc
 
 addons:
   homebrew:
@@ -20,25 +20,10 @@ addons:
       - gtest
 
 before_script:
-#  - sudo homebrew install -y libgtest-dev
-#  - cd /usr/src/gtest
-#  - sudo cmake CMakeLists.txt && sudo make
-#  - sudo cp *.a /usr/lib
-  - git clone git://sourceware.org/git/valgrind.git
-  - cd valgrind
-  - ./autogen.sh
-  - ./configure
-  - make
-  - sudo make install
-  - brew install cppcheck
-  - git clone https://github.com/google/googletest
-  - cd googletest
-  - mkdir build
-  - cd build
-  - cmake ..
-  - make
-  - make install
-  - cd "${TRAVIS_BUILD_DIR}"
+  - sudo homebrew install -y libgtest-dev
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt && sudo make
+  - sudo cp *.a /usr/lib
   - cd HW_2
   - cd tests
   - bash generate_tests.sh
