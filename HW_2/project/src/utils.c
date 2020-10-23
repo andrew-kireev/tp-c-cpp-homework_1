@@ -24,47 +24,37 @@ Matrix* read_file(const char* file_name) {
         return NULL;
     }
 
-    if (!(matrix->main_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
+    if (!(matrix->matrix = (int**)malloc(sizeof(int*) * matrix->size))) {
         free(matrix);
         fclose(file);
         return NULL;
     }
 
-    if (!(matrix->side_diagonal = (int*)malloc(sizeof(int) * matrix->size))) {
-        free(matrix->main_diagonal);
-        free(matrix);
-        fclose(file);
-        return NULL;
-    }
-
-    int *tmp_one_row;
-    if (!(tmp_one_row = (int*)malloc(sizeof(int) * matrix->size))) {
-        free(matrix->main_diagonal);
-        free(matrix->side_diagonal);
-        free(matrix);
-        fclose(file);
-        return NULL;
+    for (int i = 0; i != matrix->size; ++i) {
+        if (!(matrix->matrix[i] = (int*)malloc(sizeof(int) * matrix->size))) {
+            for (int j = 0; j != i; ++j)
+                free(matrix->matrix[j]);
+            free(matrix->matrix);
+            free(matrix);
+            fclose(file);
+            return NULL;
+        }
     }
 
     int n = matrix->size;
-    int k_main = 0;
-    int k_side = 0;
     for (size_t i = 0; i != n; ++i) {
         for (size_t j = 0; j != n; ++j) {
-            if (fscanf(file, "%d", &tmp_one_row[j]) != 1) {
-                free(tmp_one_row);
-                free(matrix->main_diagonal);
-                free(matrix->side_diagonal);
+            if (fscanf(file, "%d", &matrix->matrix[i][j]) != 1) {
+                for (int k = 0; k != n; ++k)
+                    free(matrix->matrix[k]);
+                free(matrix->matrix);
                 free(matrix);
                 fclose(file);
                 return NULL;
             }
         }
-        matrix->main_diagonal[k_main++] = tmp_one_row[i];
-        matrix->side_diagonal[k_side++] = tmp_one_row[n - i - 1];
     }
 
-    free(tmp_one_row);
     fclose(file);
     return matrix;
 }

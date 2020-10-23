@@ -13,8 +13,12 @@ Calculation_res calculate_matrix(Matrix* matrix) {
     res.side_diagonal = 0;
 
     for (int i = 0; i != n; ++i) {
-        res.main_diagonal += matrix->main_diagonal[i];
-        res.side_diagonal += matrix->side_diagonal[i];
+        for (int j = 0; j != n; ++j) {
+            if (i == j)
+                res.main_diagonal += matrix->matrix[i][j];
+            if (n == i + j + 1)
+                res.side_diagonal += matrix->matrix[i][j];
+        }
     }
 
     return res;

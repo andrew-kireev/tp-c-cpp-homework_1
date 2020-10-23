@@ -7,7 +7,8 @@
 #include <sys/mman.h>
 
 extern "C" {
-    #include "one/utils.h"
+
+    #include "one/one_proc_utils.h"
     #include "multi/multi_process_utils.h"
 }
 
