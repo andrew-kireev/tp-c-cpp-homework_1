@@ -102,45 +102,45 @@ extern "C" {
 //}
 
 
-TEST(multi_process, test_1_multi_process) {
-
-    char file_name[] = SOURCE_DIR"/tests/5";
-
-    Calculation_res* res = multi_process(file_name, 5);
-
-    EXPECT_EQ(32, get_main_diagonal(res));
-    EXPECT_EQ(14, get_side_diagonal(res));
-    free(res);
-}
-
-TEST(multi_process, test_4_multi_process) {
-
-    char file_name[] = SOURCE_DIR"/tests/7";
-
-    Calculation_res* res = multi_process(file_name, 2);
-
-    EXPECT_EQ(24, get_main_diagonal(res));
-    EXPECT_EQ(42, get_side_diagonal(res));
-    free(res);
-
-    Calculation_res* res2 = multi_process(file_name, 2);
-
-    EXPECT_EQ(24, get_main_diagonal(res2));
-    EXPECT_EQ(42, get_side_diagonal(res2));
-    free(res2);
-
-    Calculation_res* res3 = multi_process(file_name, 3);
-
-    EXPECT_EQ(24, get_main_diagonal(res3));
-    EXPECT_EQ(42, get_side_diagonal(res3));
-    free(res3);
-
-    Calculation_res* res4 = multi_process(file_name, 50);
-
-    EXPECT_EQ(24, get_main_diagonal(res4));
-    EXPECT_EQ(42, get_side_diagonal(res4));
-    free(res4);
-}
+//TEST(multi_process, test_1_multi_process) {
+//
+//    char file_name[] = SOURCE_DIR"/tests/5";
+//
+//    Calculation_res* res = multi_process(file_name, 5);
+//
+//    EXPECT_EQ(32, get_main_diagonal(res));
+//    EXPECT_EQ(14, get_side_diagonal(res));
+//    free(res);
+//}
+//
+//TEST(multi_process, test_4_multi_process) {
+//
+//    char file_name[] = SOURCE_DIR"/tests/7";
+//
+//    Calculation_res* res = multi_process(file_name, 2);
+//
+//    EXPECT_EQ(24, get_main_diagonal(res));
+//    EXPECT_EQ(42, get_side_diagonal(res));
+//    free(res);
+//
+//    Calculation_res* res2 = multi_process(file_name, 2);
+//
+//    EXPECT_EQ(24, get_main_diagonal(res2));
+//    EXPECT_EQ(42, get_side_diagonal(res2));
+//    free(res2);
+//
+//    Calculation_res* res3 = multi_process(file_name, 3);
+//
+//    EXPECT_EQ(24, get_main_diagonal(res3));
+//    EXPECT_EQ(42, get_side_diagonal(res3));
+//    free(res3);
+//
+//    Calculation_res* res4 = multi_process(file_name, 50);
+//
+//    EXPECT_EQ(24, get_main_diagonal(res4));
+//    EXPECT_EQ(42, get_side_diagonal(res4));
+//    free(res4);
+//}
 
 
 TEST(multi_process, compare) {

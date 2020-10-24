@@ -117,5 +117,4 @@ int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int pr
     }
 //    printf("\tmain diagonal = %d\n", res->main_diagonal);
 //    printf("\tside diagonal = %d\n", res->side_diagonal);
-    exit(0);
 }

@@ -8,8 +8,8 @@
 #include <stdatomic.h>
 
 typedef struct {
-    _Atomic int main_diagonal;
-    _Atomic int side_diagonal;
+    atomic_int main_diagonal;
+    atomic_int side_diagonal;
 } Calculation_multi_proc_res;
 
 int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int proc_number, int procs_amount);
