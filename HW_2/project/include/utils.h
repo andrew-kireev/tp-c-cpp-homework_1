@@ -6,6 +6,7 @@
 #define HW_2_UTILS_H
 
 #include <stdlib.h>
+#include <stdatomic.h>
 
 typedef struct {
     size_t size;
