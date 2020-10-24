@@ -6,11 +6,11 @@
 #define HW_2_UTILS_H
 
 #include <stdlib.h>
-#ifndef __cplusplus
-# include <stdatomic.h>
+#ifdef __cplusplus
+using namespace std;
+#include <atomic>
 #else
-# include <atomic>
-# define _Atomic(X) std::atomic< X >
+#include <stdatomic.h>
 #endif
 
 typedef struct {
