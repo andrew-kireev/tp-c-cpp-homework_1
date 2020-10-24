@@ -18,10 +18,6 @@ typedef struct {
     int side_diagonal;
 } Calculation_res;
 
-int get_main_diagonal(Calculation_res* res);
-
-int get_side_diagonal(Calculation_res* res);
-
 Matrix* read_file(const char* file_name);
 void free_matrix(Matrix* matrix);
 

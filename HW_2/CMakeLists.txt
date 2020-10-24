@@ -4,8 +4,8 @@ project(HW_2 C CXX)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-#set(CMAKE_C_FLAGS "-Wall -O3 -fprofile-arcs -ftest-coverage")
-#set(CMAKE_CXX_FLAGS "-Wall -O3 -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-Wall -O3 -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "-Wall -O3 -fprofile-arcs -ftest-coverage")
 
 #set(CMAKE_C_FLAGS "-Wall -Werror -O3")
 #set(CMAKE_CXX_FLAGS "-Wall -Werror -O3")
@@ -58,14 +58,11 @@ target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads pthread 
 enable_testing()
 add_test(NAME TEST_ONE COMMAND tests1)
 add_test(NAME TEST_VALGRIND COMMAND tests2)
-#add_executable(HW_2_ONE_PROC
-#    ${SRC_DIR}/one/main.c)
-#
-#add_executable(HW_2_MULTI_PROC
-#    ${SRC_DIR}/multi/main.c)
-#
-#target_link_libraries(HW_2_ONE_PROC pthread one_process)
-#target_link_libraries(HW_2_MULTI_PROC pthread multi_process)
-#
-#target_include_directories(HW_2_ONE_PROC PUBLIC ${INC_DIR})
-#target_include_directories(HW_2_MULTI_PROC PUBLIC ${INC_DIR})
+
+
+add_executable(HW_2
+    ${SRC_DIR}/main.c)
+
+target_link_libraries(HW_2 pthread one_process multi_process)
+
+target_include_directories(HW_2 PUBLIC ${INC_DIR})

@@ -96,18 +96,10 @@ Calculation__multi_proc_res* multi_process(char* file_name, int num_forks) {
 int calculate_multi_proc(Matrix* matrix, Calculation__multi_proc_res* res, int proc_number, int procs_amount) {
     int n = matrix->size;
 
-//    printf("proc_number = %d\n", proc_number);
-//    printf("\tproc_amount = %d\n", procs_amount);
-//    printf("\tproc_number + (n / procs_amount) = %d\n", procs_amount);
-
     int rest = (int)(proc_number + 1) * (int)(n / procs_amount);
-//    printf("\trest = %d\n", rest);
     if (proc_number + 1 == procs_amount) {
         rest = matrix->size;
     }
-
-//    printf("\trest = %d\n", rest);
-//    printf("\ti = %d\n", (int)proc_number * (int)(n / procs_amount));
 
     for (int i = (int)proc_number * (int)(n / procs_amount); i != rest; ++i) {
         for (int j = 0; j != n; ++j) {
@@ -124,7 +116,5 @@ int calculate_multi_proc(Matrix* matrix, Calculation__multi_proc_res* res, int p
 
         }
     }
-//    printf("\tmain diagonal = %d\n", res->main_diagonal);
-//    printf("\tside diagonal = %d\n", res->side_diagonal);
     exit(0);
 }
