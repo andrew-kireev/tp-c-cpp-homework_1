@@ -1,28 +1,10 @@
-dist: xenial
+dist: trusty
 sudo: required
-os: linux
-
-
-matrix:
-  include:
-    - os: linux
-        addons:
-          apt:
-            sources:
-              - llvm-toolchain-trusty-5.0
-            packages:
-              - clang-5.0
-        env:
-          - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-
-    before_install:
-      - eval "${MATRIX_EVAL}"
 
 language: c
 
-
-
-
+os:
+  - linux
 
 compiler:
   - gcc
@@ -37,7 +19,7 @@ addons:
       - gcovr
 
 before_script:
-  - sudo apt install clang
+  - sudo apt install build-essential
   - sudo apt-get install -y libgtest-dev
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt && sudo make
