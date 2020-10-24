@@ -6,12 +6,7 @@
 #define HW_2_UTILS_H
 
 #include <stdlib.h>
-#ifdef __cplusplus
-using namespace std;
-#include <atomic>
-#else
 #include <stdatomic.h>
-#endif
 
 typedef struct {
     size_t size;
