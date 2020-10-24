@@ -151,6 +151,11 @@ TEST(multi_process, compare) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_10");
 
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
+
     Calculation_res res2 = calculate_matrix(matrix);
 
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
@@ -166,6 +171,11 @@ TEST(multi_process, compare2) {
     Calculation_res* res = multi_process(file_name, 4);
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_23");
+
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
 
     Calculation_res res2 = calculate_matrix(matrix);
 
@@ -183,6 +193,11 @@ TEST(multi_process, compare3) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_123");
 
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
+
     Calculation_res res2 = calculate_matrix(matrix);
 
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
@@ -198,6 +213,11 @@ TEST(multi_process, compare4) {
     Calculation_res* res = multi_process(file_name, 20);
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_200");
+
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
 
     Calculation_res res2 = calculate_matrix(matrix);
 
@@ -215,6 +235,11 @@ TEST(multi_process, compare5) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_555");
 
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
+
     Calculation_res res2 = calculate_matrix(matrix);
 
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
@@ -230,6 +255,11 @@ TEST(multi_process, compare6) {
     Calculation_res* res = multi_process(file_name, 23);
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_666");
+
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
 
     Calculation_res res2 = calculate_matrix(matrix);
 
@@ -247,6 +277,11 @@ TEST(multi_process, compare7) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1333");
 
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
+
     Calculation_res res2 = calculate_matrix(matrix);
 
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
@@ -263,6 +298,11 @@ TEST(multi_process, compare8) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1777");
 
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
+
     Calculation_res res2 = calculate_matrix(matrix);
 
     EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
@@ -278,6 +318,11 @@ TEST(multi_process, compare9) {
     Calculation_res* res = multi_process(file_name, 50);
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_5000");
+
+    if (matrix == NULL) {
+        munmap(res, getpagesize());
+        return;
+    }
 
     Calculation_res res2 = calculate_matrix(matrix);
 
