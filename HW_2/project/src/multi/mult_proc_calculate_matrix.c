@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include <pthread.h>
+#include <fcntl.h>
 
 
 
