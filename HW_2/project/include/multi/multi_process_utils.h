@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include "utils.h"
-#include <stdatomic.h>
 
 # define PARENT_PID -5
 
