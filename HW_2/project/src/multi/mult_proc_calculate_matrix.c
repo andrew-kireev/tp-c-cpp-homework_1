@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/wait.h>
+#include "multi/atomic.h"
 
 
 int create_forks(int num, int *pids) {
