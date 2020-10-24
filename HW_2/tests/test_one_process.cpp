@@ -74,7 +74,7 @@ TEST(multi_process, test_1_multi_process) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
 
         EXPECT_EQ(32, main);
@@ -91,7 +91,7 @@ TEST(multi_process, test_4_multi_process) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
         EXPECT_EQ(24, main);
         EXPECT_EQ(42, side);
     }
@@ -101,7 +101,7 @@ TEST(multi_process, test_4_multi_process) {
     if (res2 != NULL) {
         int main = res2->main_diagonal;
         int side = res2->side_diagonal;
-        free(res2);
+        munmap(res, getpagesize());
         EXPECT_EQ(24, main);
         EXPECT_EQ(42, side);
     }
@@ -111,7 +111,7 @@ TEST(multi_process, test_4_multi_process) {
     if (res3 != NULL) {
         int main = res3->main_diagonal;
         int side = res3->side_diagonal;
-        free(res3);
+        munmap(res, getpagesize());
         EXPECT_EQ(24,  main);
         EXPECT_EQ(42, side);
     }
@@ -121,7 +121,7 @@ TEST(multi_process, test_4_multi_process) {
     if (res4 != NULL) {
         int main = res4->main_diagonal;
         int side = res4->side_diagonal;
-        free(res4);
+        munmap(res, getpagesize());
         EXPECT_EQ(24, main);
         EXPECT_EQ(42, side);
     }
@@ -137,7 +137,7 @@ TEST(multi_process, compare) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -151,7 +151,6 @@ TEST(multi_process, compare) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -164,7 +163,7 @@ TEST(multi_process, compare2) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -178,7 +177,6 @@ TEST(multi_process, compare2) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -191,7 +189,7 @@ TEST(multi_process, compare3) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -205,7 +203,6 @@ TEST(multi_process, compare3) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -218,7 +215,7 @@ TEST(multi_process, compare4) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -232,7 +229,6 @@ TEST(multi_process, compare4) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -245,7 +241,7 @@ TEST(multi_process, compare5) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -259,7 +255,6 @@ TEST(multi_process, compare5) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -272,7 +267,7 @@ TEST(multi_process, compare6) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -286,7 +281,6 @@ TEST(multi_process, compare6) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -299,7 +293,7 @@ TEST(multi_process, compare7) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -313,7 +307,6 @@ TEST(multi_process, compare7) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -326,7 +319,7 @@ TEST(multi_process, compare8) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -340,7 +333,6 @@ TEST(multi_process, compare8) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
@@ -353,7 +345,7 @@ TEST(multi_process, compare9) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        free(res);
+        munmap(res, getpagesize());
 
         Matrix *matrix = read_file(file_name);
 
@@ -367,7 +359,6 @@ TEST(multi_process, compare9) {
 
         EXPECT_EQ(res2.main_diagonal, main);
         EXPECT_EQ(res2.side_diagonal, side);
-        munmap(res, getpagesize());
     }
 }
 
