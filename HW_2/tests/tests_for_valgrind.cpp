@@ -6,6 +6,9 @@
 #include <gtest/gtest.h>
 #include <string>
 #include <sys/mman.h>
+#include <atomic>
+
+#define _Atomic(T) std::atomic<T>
 
 extern "C" {
 #include "one/one_proc_utils.h"
