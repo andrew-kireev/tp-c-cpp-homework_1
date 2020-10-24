@@ -16,26 +16,26 @@ addons:
 
 before_script:
   - git clone git://sourceware.org/git/valgrind.git
-    - cd valgrind
-    - ./autogen.sh
-    - ./configure
-    - make
-    - sudo make install
-    - brew install cppcheck
-    - git clone https://github.com/google/googletest
-    - cd googletest
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
-    - make install
-    - cd "${TRAVIS_BUILD_DIR}"
-    - cd HW_2
-    - cd tests
-    - bash generate_tests.sh
-    - cd ..
-    - cmake .
-    - make
+  - cd valgrind
+  - ./autogen.sh
+  - ./configure
+  - make
+  - sudo make install
+  - brew install cppcheck
+  - git clone https://github.com/google/googletest
+  - cd googletest
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - make install
+  - cd "${TRAVIS_BUILD_DIR}"
+  - cd HW_2
+  - cd tests
+  - bash generate_tests.sh
+  - cd ..
+  - cmake .
+  - make
 
 script:
   - ./TEST
