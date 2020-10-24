@@ -28,7 +28,7 @@ TEST(multi_process, compare2) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    munmap(res, getpagesize());
+    free(res);
     free_matrix(matrix);
 }
 
@@ -48,7 +48,7 @@ TEST(multi_process, compare3) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    munmap(res, getpagesize());
+    free(res);
     free_matrix(matrix);
 }
 
@@ -68,7 +68,7 @@ TEST(multi_process, compare4) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    munmap(res, getpagesize());
+    free(res);
     free_matrix(matrix);
 }
 
@@ -88,7 +88,7 @@ TEST(multi_process, compare5) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    munmap(res, getpagesize());
+    free(res);
     free_matrix(matrix);
 }
 
@@ -108,7 +108,7 @@ TEST(multi_process, compare6) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    munmap(res, getpagesize());
+    free(res);
     free_matrix(matrix);
 }
 

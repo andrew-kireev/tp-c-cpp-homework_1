@@ -7,13 +7,19 @@
 
 #include <stdio.h>
 #include "utils.h"
+#include <stdatomic.h>
 
 # define PARENT_PID -5
+
+typedef struct {
+    _Atomic int main_diagonal;
+    _Atomic int side_diagonal;
+} Calculation_multi_proc_res;
 
 int create_forks(int num, int *pids);
 Calculation_res *create_shared_memory();
 Calculation_res* multi_process(char* file_name, int num_forks);
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount);
+int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int proc_number, int procs_amount);
 
 
 #endif  // HW_2_PROJECT_INCLUDE_MULTI_MULTI_PROCESS_UTILS_H_

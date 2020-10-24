@@ -43,7 +43,7 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
     Matrix* matrix;
     matrix = read_file(file_name);
 
-    Calculation_res *res;
+    Calculation_multi_proc_res *res;
 
     if (matrix == NULL)
         return NULL;
@@ -79,10 +79,18 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
 //    printf("main diagonal = %d\n", res->main_diagonal);
 //    printf("main diagonal = %d\n", res->side_diagonal);
 
-    return res;
+    Calculation_res* final_res;
+    if((final_res = (Calculation_res*)malloc(sizeof(Calculation_res) * 1)) == NULL) {
+        return NULL;
+    }
+    final_res->main_diagonal = res->main_diagonal;
+    final_res->side_diagonal = res->side_diagonal;
+
+    munmap(res, getpagesize());
+    return final_res;
 }
 
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount) {
+int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int proc_number, int procs_amount) {
     int n = matrix->size;
 
 //    printf("proc_number = %d\n", proc_number);
