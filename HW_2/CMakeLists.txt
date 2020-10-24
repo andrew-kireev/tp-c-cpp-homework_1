@@ -58,11 +58,11 @@ target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads pthread 
 enable_testing()
 add_test(NAME TEST_ONE COMMAND tests1)
 add_test(NAME TEST_VALGRIND COMMAND tests2)
-add_executable(HW_2_ONE_PROC
-    ${SRC_DIR}/one/main.c)
-
-add_executable(HW_2_MULTI_PROC
-    ${SRC_DIR}/multi/main.c)
+#add_executable(HW_2_ONE_PROC
+#    ${SRC_DIR}/one/main.c)
+#
+#add_executable(HW_2_MULTI_PROC
+#    ${SRC_DIR}/multi/main.c)
 
 #target_link_libraries(HW_2_ONE_PROC pthread one_process)
 #target_link_libraries(HW_2_MULTI_PROC pthread multi_process)
