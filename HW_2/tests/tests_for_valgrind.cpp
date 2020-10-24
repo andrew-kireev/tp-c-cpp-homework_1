@@ -26,8 +26,8 @@ TEST(multi_process, compare2) {
 
     Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
+    EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
     munmap(res, getpagesize());
     free_matrix(matrix);
 }
@@ -46,8 +46,8 @@ TEST(multi_process, compare3) {
 
     Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
+    EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
     munmap(res, getpagesize());
     free_matrix(matrix);
 }
@@ -66,8 +66,8 @@ TEST(multi_process, compare4) {
 
     Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
+    EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
     munmap(res, getpagesize());
     free_matrix(matrix);
 }
@@ -86,8 +86,8 @@ TEST(multi_process, compare5) {
 
     Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
+    EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
     munmap(res, getpagesize());
     free_matrix(matrix);
 }
@@ -106,8 +106,8 @@ TEST(multi_process, compare6) {
 
     Calculation_res res2 = calculate_matrix(matrix);
 
-    EXPECT_EQ(res2.main_diagonal, res->main_diagonal);
-    EXPECT_EQ(res2.side_diagonal, res->side_diagonal);
+    EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
+    EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
     munmap(res, getpagesize());
     free_matrix(matrix);
 }

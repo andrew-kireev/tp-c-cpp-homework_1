@@ -67,3 +67,12 @@ void free_matrix(Matrix* matrix) {
     free(matrix->matrix);
     free(matrix);
 }
+
+
+int get_main_diagonal(Calculation_res* res) {
+    return res->main_diagonal;
+}
+
+int get_side_diagonal(Calculation_res* res) {
+    return res->side_diagonal;
+}
