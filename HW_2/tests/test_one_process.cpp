@@ -5,9 +5,7 @@
 #include <gtest/gtest.h>
 #include <string>
 #include <sys/mman.h>
-#include <atomic>
 
-#define _Atomic(T) std::atomic<T>
 
 extern "C" {
 
@@ -155,7 +153,7 @@ TEST(multi_process, compare) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_10");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -163,7 +161,7 @@ TEST(multi_process, compare) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -176,7 +174,7 @@ TEST(multi_process, compare2) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_23");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -184,7 +182,7 @@ TEST(multi_process, compare2) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -197,7 +195,7 @@ TEST(multi_process, compare3) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_123");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -205,7 +203,7 @@ TEST(multi_process, compare3) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -218,7 +216,7 @@ TEST(multi_process, compare4) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_200");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -226,7 +224,7 @@ TEST(multi_process, compare4) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);;
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -239,7 +237,7 @@ TEST(multi_process, compare5) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_555");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -247,7 +245,7 @@ TEST(multi_process, compare5) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -260,7 +258,7 @@ TEST(multi_process, compare6) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_666");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -268,7 +266,7 @@ TEST(multi_process, compare6) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -281,7 +279,7 @@ TEST(multi_process, compare7) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1333");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -289,7 +287,7 @@ TEST(multi_process, compare7) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -302,7 +300,7 @@ TEST(multi_process, compare8) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_1777");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -310,7 +308,7 @@ TEST(multi_process, compare8) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -323,7 +321,7 @@ TEST(multi_process, compare9) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/size_5000");
 
     if (matrix == NULL) {
-        free(res);
+        munmap(res, getpagesize());
         return;
     }
 
@@ -331,7 +329,7 @@ TEST(multi_process, compare9) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 

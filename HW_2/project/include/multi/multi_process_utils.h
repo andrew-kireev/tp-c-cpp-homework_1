@@ -14,6 +14,8 @@
 int create_forks(int num, int *pids);
 Calculation_res *create_shared_memory();
 Calculation_res* multi_process(char* file_name, int num_forks);
+int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount);
+
 
 
 #endif  // HW_2_PROJECT_INCLUDE_MULTI_MULTI_PROCESS_UTILS_H_

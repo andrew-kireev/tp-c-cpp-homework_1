@@ -6,9 +6,7 @@
 #include <gtest/gtest.h>
 #include <string>
 #include <sys/mman.h>
-#include <atomic>
 
-#define _Atomic(T) std::atomic<T>
 
 extern "C" {
 #include "one/one_proc_utils.h"
@@ -31,7 +29,7 @@ TEST(multi_process, compare2) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -51,7 +49,7 @@ TEST(multi_process, compare3) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -71,7 +69,7 @@ TEST(multi_process, compare4) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -91,7 +89,7 @@ TEST(multi_process, compare5) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
@@ -111,7 +109,7 @@ TEST(multi_process, compare6) {
 
     EXPECT_EQ(get_main_diagonal(&res2), get_main_diagonal(res));
     EXPECT_EQ(get_side_diagonal(&res2), get_side_diagonal(res));
-    free(res);
+    munmap(res, getpagesize());
     free_matrix(matrix);
 }
 
