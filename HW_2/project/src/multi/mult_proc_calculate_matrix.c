@@ -27,10 +27,10 @@ int create_forks(int num, int *pids) {
     return PARENT_PID;          // Код parent процесса, нужно будет потом добавить enum;
 }
 
-Calculation_res *create_shared_memory() {
+Calculation__multi_proc_res *create_shared_memory() {
     size_t page_size = getpagesize();
 
-    Calculation_res *shared_memory = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
+    Calculation__multi_proc_res *shared_memory = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
                                           MAP_SHARED | MAP_ANONYMOUS, -1, 0);
 
     if (!shared_memory) {
@@ -41,10 +41,10 @@ Calculation_res *create_shared_memory() {
     return shared_memory;
 }
 
-static Calculation_res *res;
+static Calculation__multi_proc_res* res;
 
 
-Calculation_res* multi_process(char* file_name, int num_forks) {
+Calculation__multi_proc_res* multi_process(char* file_name, int num_forks) {
     Matrix* matrix;
     matrix = read_file(file_name);
 
@@ -90,15 +90,10 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
 //    printf("main diagonal = %d\n", res->main_diagonal);
 //    printf("main diagonal = %d\n", res->side_diagonal);
 
-    Calculation_res* final_res;
-    if((final_res = (Calculation_res*)malloc(sizeof(Calculation_res) * 1)) == NULL) {
-        return NULL;
-    }
-
     return res;
 }
 
-int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, int procs_amount) {
+int calculate_multi_proc(Matrix* matrix, Calculation__multi_proc_res* res, int proc_number, int procs_amount) {
     int n = matrix->size;
 
 //    printf("proc_number = %d\n", proc_number);

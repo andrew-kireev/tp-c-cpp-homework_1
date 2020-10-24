@@ -16,7 +16,6 @@ typedef struct {
 typedef struct {
     int main_diagonal;
     int side_diagonal;
-    pthread_mutex_t mutex;
 } Calculation_res;
 
 int get_main_diagonal(Calculation_res* res);
