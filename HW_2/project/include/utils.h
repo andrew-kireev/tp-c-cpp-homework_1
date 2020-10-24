@@ -6,7 +6,12 @@
 #define HW_2_UTILS_H
 
 #include <stdlib.h>
-#include <stdatomic.h>
+#ifndef __cplusplus
+# include <stdatomic.h>
+#else
+# include <atomic>
+# define _Atomic(X) std::atomic< X >
+#endif
 
 typedef struct {
     size_t size;
