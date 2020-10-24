@@ -7,7 +7,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
-#include <sys/wait.h>
+
+
 
 
 int create_forks(int num, int *pids) {
@@ -38,12 +39,12 @@ Calculation_res *create_shared_memory() {
     return shared_memory;
 }
 
+static Calculation_res *res;
+
 
 Calculation_res* multi_process(char* file_name, int num_forks) {
     Matrix* matrix;
     matrix = read_file(file_name);
-
-    Calculation_res *res;
 
     if (matrix == NULL)
         return NULL;
@@ -53,11 +54,17 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
     for (int i = 0; i != num_forks; ++i)
         pids[i] = 0;
 
+
     if ((res = create_shared_memory()) == NULL) {
         free_matrix(matrix);
         free(pids);
         return NULL;
     }
+
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+    pthread_mutex_init(&res->mutex, &attr);
 
     int process_number;
     if ((process_number = create_forks(num_forks, pids)) == -1) {
@@ -66,6 +73,8 @@ Calculation_res* multi_process(char* file_name, int num_forks) {
         return NULL;
     }
 //    printf("pid = %d\n", process_number);
+
+
 
     if (process_number != PARENT_PID)
         calculate_multi_proc(matrix, res, process_number, num_forks);
@@ -105,10 +114,17 @@ int calculate_multi_proc(Matrix* matrix, Calculation_res* res, int proc_number, 
 
     for (int i = (int)proc_number * (int)(n / procs_amount); i != rest; ++i) {
         for (int j = 0; j != n; ++j) {
-            if (i == j)
+            if (i == j) {
+                pthread_mutex_lock(&res->mutex);
                 res->main_diagonal += matrix->matrix[i][j];
-            if (n == i + j + 1)
+                pthread_mutex_unlock(&res->mutex);
+            }
+            if (n == i + j + 1) {
+                pthread_mutex_lock(&res->mutex);
                 res->side_diagonal += matrix->matrix[i][j];
+                pthread_mutex_unlock(&res->mutex);
+            }
+
         }
     }
 //    printf("\tmain diagonal = %d\n", res->main_diagonal);

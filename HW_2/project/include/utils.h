@@ -6,6 +6,7 @@
 #define HW_2_UTILS_H
 
 #include <stdlib.h>
+#include <pthread.h>
 
 typedef struct {
     size_t size;
@@ -15,6 +16,7 @@ typedef struct {
 typedef struct {
     int main_diagonal;
     int side_diagonal;
+    pthread_mutex_t mutex;
 } Calculation_res;
 
 int get_main_diagonal(Calculation_res* res);

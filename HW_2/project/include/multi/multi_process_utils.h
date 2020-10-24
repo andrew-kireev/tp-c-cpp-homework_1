@@ -7,6 +7,10 @@
 
 #include <stdio.h>
 #include "utils.h"
+#include <sys/wait.h>
+#include <semaphore.h>
+#include <fcntl.h>
+#include <pthread.h>
 
 # define PARENT_PID -5
 
