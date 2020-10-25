@@ -33,6 +33,16 @@ TEST(calculate_matrix, test1_calculate_matrix) {
     }
 }
 
+//Теста синхронного функции calculate_matrix_one_proc, которая читает и вычисляет матрицу
+
+TEST(calculate_matrix_one_proc, test_synchronous_calc) {
+    char file_name[] = SOURCE_DIR"/tests/test1";
+    Calculation_res res = calculate_matrix_one_proc(file_name);
+
+    EXPECT_EQ(15, res.main_diagonal);
+    EXPECT_EQ(16, res.side_diagonal);
+}
+
 // Тест чтения из файлов
 
 TEST(read_file, test1_read_file) {
