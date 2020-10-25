@@ -3,17 +3,18 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
 #include "one/one_proc_utils.h"
 #include "multi/multi_process_utils.h"
-#include <pthread.h>
 
 
 
 int main(int argc, char **argv) {
-
     char file_name[50] = {};
+    if (argc > 1)
+        strcpy(file_name, argv[1]);
 
     scanf("%s", file_name);
 
@@ -28,10 +29,12 @@ int main(int argc, char **argv) {
     printf("Сумма побочной диагонали = %d\n", one_proc_res.side_diagonal);
 
 
-    int num_forks = 10;
-    scanf("%d", &num_forks);
+    int num_forks;
+    if (scanf("%d", &num_forks) != 1) {
+        num_forks = 10;
+    }
 
-    Calculation__multi_proc_res* multi_proc_res = multi_process(file_name, num_forks);
+    Calculation_multi_proc_res* multi_proc_res = multi_process(file_name, num_forks);
     if (multi_proc_res == NULL)
         return 0;
 

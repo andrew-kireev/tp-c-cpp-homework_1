@@ -4,7 +4,6 @@
 
 #include "utils.h"
 
-
 Calculation_res calculate_matrix(Matrix* matrix) {
     Calculation_res res;
     int n = matrix->size;

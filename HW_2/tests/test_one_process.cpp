@@ -69,7 +69,7 @@ TEST(multi_process, test_1_multi_process) {
 
     char file_name[] = SOURCE_DIR"/tests/5";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 5);
+    Calculation_multi_proc_res* res = multi_process(file_name, 5);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -86,7 +86,7 @@ TEST(multi_process, test_4_multi_process) {
 
     char file_name[] = SOURCE_DIR"/tests/7";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 2);
+    Calculation_multi_proc_res* res = multi_process(file_name, 2);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -96,7 +96,7 @@ TEST(multi_process, test_4_multi_process) {
         EXPECT_EQ(42, side);
     }
 
-    Calculation__multi_proc_res* res2 = multi_process(file_name, 5);
+    Calculation_multi_proc_res* res2 = multi_process(file_name, 5);
 
     if (res2 != NULL) {
         int main = res2->main_diagonal;
@@ -106,7 +106,7 @@ TEST(multi_process, test_4_multi_process) {
         EXPECT_EQ(42, side);
     }
 
-    Calculation__multi_proc_res* res3 = multi_process(file_name, 3);
+    Calculation_multi_proc_res* res3 = multi_process(file_name, 3);
 
     if (res3 != NULL) {
         int main = res3->main_diagonal;
@@ -116,7 +116,7 @@ TEST(multi_process, test_4_multi_process) {
         EXPECT_EQ(42, side);
     }
 
-    Calculation__multi_proc_res* res4 = multi_process(file_name, 50);
+    Calculation_multi_proc_res* res4 = multi_process(file_name, 50);
 
     if (res4 != NULL) {
         int main = res4->main_diagonal;
@@ -132,7 +132,7 @@ TEST(multi_process, compare) {
 
     char file_name[] = SOURCE_DIR"/tests/size_10";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 5);
+    Calculation_multi_proc_res* res = multi_process(file_name, 5);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -158,7 +158,7 @@ TEST(multi_process, compare2) {
 
     char file_name[] = SOURCE_DIR"/tests/size_23";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 4);
+    Calculation_multi_proc_res* res = multi_process(file_name, 4);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -184,7 +184,7 @@ TEST(multi_process, compare3) {
 
     char file_name[] = SOURCE_DIR"/tests/size_123";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 12);
+    Calculation_multi_proc_res* res = multi_process(file_name, 12);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -210,7 +210,7 @@ TEST(multi_process, compare4) {
 
     char file_name[] = SOURCE_DIR"/tests/size_200";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 20);
+    Calculation_multi_proc_res* res = multi_process(file_name, 20);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -236,7 +236,7 @@ TEST(multi_process, compare5) {
 
     char file_name[] = SOURCE_DIR"/tests/size_555";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 11);
+    Calculation_multi_proc_res* res = multi_process(file_name, 11);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -262,7 +262,7 @@ TEST(multi_process, compare6) {
 
     char file_name[] = SOURCE_DIR"/tests/size_666";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 23);
+    Calculation_multi_proc_res* res = multi_process(file_name, 23);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -288,7 +288,7 @@ TEST(multi_process, compare7) {
 
     char file_name[] = SOURCE_DIR"/tests/size_1333";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 50);
+    Calculation_multi_proc_res* res = multi_process(file_name, 50);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -314,7 +314,7 @@ TEST(multi_process, compare8) {
 
     char file_name[] = SOURCE_DIR"/tests/size_1777";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 100);
+    Calculation_multi_proc_res* res = multi_process(file_name, 100);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -340,7 +340,7 @@ TEST(multi_process, compare9) {
 
     char file_name[] = SOURCE_DIR"/tests/size_5000";
 
-    Calculation__multi_proc_res* res = multi_process(file_name, 50);
+    Calculation_multi_proc_res* res = multi_process(file_name, 50);
 
     if (res != NULL) {
         int main = res->main_diagonal;
