@@ -19,8 +19,8 @@ TEST(read_file, read) {
         free_matrix(matrix);
 }
 
-//
-//
+// Тест синхронного алгоритма
+
 TEST(calculate_matrix, test1_calculate_matrix) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/test1");
 
@@ -32,9 +32,19 @@ TEST(calculate_matrix, test1_calculate_matrix) {
         EXPECT_EQ(16, res.side_diagonal);
     }
 }
-//
-//
-//
+
+//Теста синхронного функции calculate_matrix_one_proc, которая читает и вычисляет матрицу
+
+TEST(calculate_matrix_one_proc, test_synchronous_calc) {
+    char file_name[] = SOURCE_DIR"/tests/test1";
+    Calculation_res res = calculate_matrix_one_proc(file_name);
+
+    EXPECT_EQ(15, res.main_diagonal);
+    EXPECT_EQ(16, res.side_diagonal);
+}
+
+// Тест чтения из файлов
+
 TEST(read_file, test1_read_file) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/test1");
@@ -63,6 +73,7 @@ TEST(read_file, test2_read_file) {
     }
 }
 
+// Тест многопроцессорного алгоритма
 
 TEST(multi_process, test_1_multi_process) {
 
@@ -80,6 +91,7 @@ TEST(multi_process, test_1_multi_process) {
         EXPECT_EQ(14, side);
     }
 }
+
 
 TEST(multi_process, test_4_multi_process) {
 
@@ -126,6 +138,9 @@ TEST(multi_process, test_4_multi_process) {
     }
 }
 
+
+// Сравнение результатов синхронного и многопроцессорного алгоритма
+// При разных матрицах и разном количестве процессов
 
 TEST(multi_process, compare) {
 
