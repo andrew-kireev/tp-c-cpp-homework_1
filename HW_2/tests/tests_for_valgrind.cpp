@@ -13,6 +13,9 @@ extern "C" {
 #include "multi/multi_process_utils.h"
 }
 
+// Сравнение результатов синхронного и многопроцессорного алгоритма
+// При разных матрицах и разном количестве процессов
+
 TEST(multi_process, compare2) {
     char file_name[] = SOURCE_DIR"/tests/size_10";
 

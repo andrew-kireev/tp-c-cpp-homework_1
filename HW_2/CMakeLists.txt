@@ -36,7 +36,7 @@ add_library(compute_matrix_parallel SHARED
         ${SRC_DIR}/utils.c)
 
 add_executable(TEST
-    tests/test_one_process.cpp)
+        tests/test.cpp)
 
 target_include_directories(TEST PUBLIC ${INC_DIR})
 
