@@ -22,3 +22,17 @@ Calculation_res calculate_matrix(Matrix* matrix) {
 
     return res;
 }
+
+Calculation_res calculate_matrix_one_proc(char* file_name) {
+    Matrix* matrix;
+
+    Calculation_res res;
+    res.main_diagonal = 0;
+    res.side_diagonal = 0;
+
+    if ((matrix = read_file(file_name)) == NULL)
+        return res;
+
+    res = calculate_matrix(matrix);
+    return res;
+}

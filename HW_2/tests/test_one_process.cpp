@@ -13,7 +13,6 @@ extern "C" {
     #include "multi/multi_process_utils.h"
 }
 
-
 TEST(read_file, read) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/tes");
     if (matrix != NULL)
@@ -340,7 +339,7 @@ TEST(multi_process, compare9) {
 
     char file_name[] = SOURCE_DIR"/tests/size_5000";
 
-    Calculation_multi_proc_res* res = multi_process(file_name, 50);
+    Calculation_multi_proc_res* res = multi_process(file_name, 10);
 
     if (res != NULL) {
         int main = res->main_diagonal;
@@ -362,6 +361,31 @@ TEST(multi_process, compare9) {
     }
 }
 
+TEST(multi_process, compare10) {
+
+    char file_name[] = SOURCE_DIR"/tests/size_10000";
+
+    Calculation_multi_proc_res* res = multi_process(file_name, 30);
+
+    if (res != NULL) {
+        int main = res->main_diagonal;
+        int side = res->side_diagonal;
+        munmap(res, getpagesize());
+
+        Matrix *matrix = read_file(file_name);
+
+        if (matrix == NULL) {
+            munmap(res, getpagesize());
+            return;
+        }
+
+        Calculation_res res2 = calculate_matrix(matrix);
+        free_matrix(matrix);
+
+        EXPECT_EQ(res2.main_diagonal, main);
+        EXPECT_EQ(res2.side_diagonal, side);
+    }
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
