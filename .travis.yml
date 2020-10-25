@@ -23,9 +23,7 @@ before_script:
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt && sudo make
   - sudo cp *.a /usr/lib
-  - cd "${TRAVIS_BUILD_DIR}"
-  - cd HW_2
-  - cd tests
+  - cd "${TRAVIS_BUILD_DIR}"/HW_2/tests
   - bash generate_tests.sh
   - cd ..
   - cmake .

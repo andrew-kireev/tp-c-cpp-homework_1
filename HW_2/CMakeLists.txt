@@ -29,13 +29,13 @@ set(TESTS_DIR ${DIR}/tests)
 include_directories("${GTEST_INCLUDE_DIRS}")
 include_directories(project/include)
 
-add_library(one_process STATIC
+add_library(compute_matrix STATIC
         ${INC_DIR}/utils.h
         ${SRC_DIR}/one/calculate_matrix.c
         ${SRC_DIR}/utils.c
         ${INC_DIR}/one/one_proc_utils.h)
 
-add_library(multi_process SHARED
+add_library(compute_matrix_parallel SHARED
         ${INC_DIR}/multi/multi_process_utils.h
         ${SRC_DIR}/multi/mult_proc_calculate_matrix.c
         ${SRC_DIR}/utils.c)
@@ -45,14 +45,14 @@ add_executable(TEST
 
 target_include_directories(TEST PUBLIC ${INC_DIR})
 
-target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads pthread one_process multi_process)
+target_link_libraries(TEST ${GTEST_LIBRARIES} Threads::Threads pthread compute_matrix compute_matrix_parallel)
 
 add_executable(TEST_VALGRIND
     tests/tests_for_valgrind.cpp)
 
 target_include_directories(TEST_VALGRIND PUBLIC ${INC_DIR})
 
-target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads pthread one_process multi_process)
+target_link_libraries(TEST_VALGRIND ${GTEST_LIBRARIES} Threads::Threads pthread compute_matrix compute_matrix_parallel)
 
 
 enable_testing()
@@ -63,6 +63,6 @@ add_test(NAME TEST_VALGRIND COMMAND tests2)
 add_executable(HW_2
     ${SRC_DIR}/main.c)
 
-target_link_libraries(HW_2 Threads::Threads pthread one_process multi_process)
+target_link_libraries(HW_2 Threads::Threads pthread compute_matrix compute_matrix_parallel)
 
 target_include_directories(HW_2 PUBLIC ${INC_DIR})
