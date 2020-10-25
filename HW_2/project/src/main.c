@@ -15,8 +15,9 @@ int main(int argc, char **argv) {
     char file_name[50] = {};
     if (argc > 1)
         strcpy(file_name, argv[1]);
-
-    scanf("%s", file_name);
+    else
+        if (scanf("%s", file_name) == 0)
+            return 0;
 
     Matrix* matrix = read_file(file_name);
     if (matrix == NULL)
