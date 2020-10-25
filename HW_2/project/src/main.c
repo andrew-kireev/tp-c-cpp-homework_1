@@ -3,11 +3,11 @@
 //
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/mman.h>
 #include <unistd.h>
 #include "one/one_proc_utils.h"
 #include "multi/multi_process_utils.h"
+#include <pthread.h>
 
 
 

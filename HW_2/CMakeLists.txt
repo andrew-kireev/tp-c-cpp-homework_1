@@ -63,6 +63,6 @@ add_test(NAME TEST_VALGRIND COMMAND tests2)
 add_executable(HW_2
     ${SRC_DIR}/main.c)
 
-target_link_libraries(HW_2 pthread one_process multi_process)
+target_link_libraries(HW_2 Threads::Threads pthread one_process multi_process)
 
 target_include_directories(HW_2 PUBLIC ${INC_DIR})
