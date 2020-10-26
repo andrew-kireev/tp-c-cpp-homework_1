@@ -29,7 +29,6 @@ TEST(multi_process, compare2) {
         Matrix *matrix = read_file(file_name);
 
         if (matrix == NULL) {
-            munmap(res, getpagesize());
             return;
         }
 
@@ -81,7 +80,6 @@ TEST(multi_process, compare4) {
         Matrix *matrix = read_file(file_name);
 
         if (matrix == NULL) {
-            munmap(res, getpagesize());
             return;
         }
 
@@ -106,7 +104,6 @@ TEST(multi_process, compare5) {
         Matrix *matrix = read_file(file_name);
 
         if (matrix == NULL) {
-            munmap(res, getpagesize());
             return;
         }
 
@@ -131,7 +128,6 @@ TEST(multi_process, compare6) {
         Matrix *matrix = read_file(file_name);
 
         if (matrix == NULL) {
-            munmap(res, getpagesize());
             return;
         }
 
@@ -156,7 +152,6 @@ TEST(multi_process, compare7) {
         Matrix *matrix = read_file(file_name);
 
         if (matrix == NULL) {
-            munmap(res, getpagesize());
             return;
         }
 

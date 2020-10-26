@@ -34,5 +34,6 @@ Calculation_res calculate_matrix_one_proc(char* file_name) {
         return res;
 
     res = calculate_matrix(matrix);
+    free_matrix(matrix);
     return res;
 }
