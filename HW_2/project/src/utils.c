@@ -60,6 +60,8 @@ Matrix* read_file(const char* file_name) {
 }
 
 void free_matrix(Matrix* matrix) {
+    if (matrix == NULL)
+        return;
     int n = matrix->size;
 
     for (int i = 0; i != n; ++i)

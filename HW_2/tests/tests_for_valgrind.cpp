@@ -45,8 +45,6 @@ TEST(multi_process, compare_algs_matrix_size_20) {
 
     Calculation_multi_proc_res* res = multi_process(file_name, 4);
 
-    Matrix* matrix = read_file(SOURCE_DIR"/tests/size_20");
-
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
