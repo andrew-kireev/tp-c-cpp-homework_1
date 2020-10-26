@@ -32,7 +32,7 @@ Matrix* read_file(const char* file_name) {
 
     for (size_t i = 0; i != matrix->size; ++i) {
         if ((matrix->matrix[i] = (int*)malloc(sizeof(int) * matrix->size)) == NULL) {
-            for (size_t j = 0; j != i; ++j)
+            for (size_t j = 0; j != i; j++)
                 free(matrix->matrix[j]);
             free(matrix->matrix);
             free(matrix);

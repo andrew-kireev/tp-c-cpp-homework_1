@@ -31,7 +31,7 @@ before_script:
 
 script:
   - ./TEST
-  - valgrind --track-origins=yes --leak-check=full ./TEST_VALGRIND
+  - valgrind --track-origins=yes --child-silent-after-fork=yes --leak-check=full ./TEST_VALGRIND
   - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
   - cd "${TRAVIS_BUILD_DIR}"/HW_2/project
   #  - gcovr -r ..
