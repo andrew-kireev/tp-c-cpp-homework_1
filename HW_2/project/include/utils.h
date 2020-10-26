@@ -10,7 +10,7 @@
 
 typedef struct {
     size_t size;
-    int **matrix;
+    int** matrix;
 } Matrix;
 
 typedef struct {

@@ -13,14 +13,14 @@ Matrix* read_file(const char* file_name) {
         return NULL;
 
     Matrix* matrix;
-    if (!(matrix = (Matrix*)malloc(sizeof(Matrix) * 1))) {
+    if ((matrix = (Matrix*)malloc(sizeof(Matrix))) == NULL) {
         fclose(file);
         return NULL;
     }
 
     if (fscanf(file, "%zu", &matrix->size) != 1) {
-        free(matrix);
         fclose(file);
+        free(matrix);
         return NULL;
     }
 
@@ -31,7 +31,7 @@ Matrix* read_file(const char* file_name) {
     }
 
     for (size_t i = 0; i != matrix->size; ++i) {
-        if (!(matrix->matrix[i] = (int*)malloc(sizeof(int) * matrix->size))) {
+        if ((matrix->matrix[i] = (int*)malloc(sizeof(int) * matrix->size)) == NULL) {
             for (size_t j = 0; j != i; ++j)
                 free(matrix->matrix[j]);
             free(matrix->matrix);

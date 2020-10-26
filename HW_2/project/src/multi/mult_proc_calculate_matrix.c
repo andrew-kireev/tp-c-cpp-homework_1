@@ -66,6 +66,7 @@ Calculation_multi_proc_res* multi_process(char* file_name, int num_forks) {
 
     int process_number;
     if ((process_number = create_forks(num_forks, pids)) == -1) {
+        munmap(res, getpagesize());
         free_matrix(matrix);
         free(pids);
         return NULL;
