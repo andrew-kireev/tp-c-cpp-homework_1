@@ -16,7 +16,7 @@ extern "C" {
 // Сравнение результатов синхронного и многопроцессорного алгоритма
 // При разных матрицах и разном количестве процессов
 
-TEST(multi_process, compare2) {
+TEST(multi_process, compare_algs_matrix_size_10) {
     char file_name[] = SOURCE_DIR"/tests/size_10";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 2);
@@ -40,7 +40,7 @@ TEST(multi_process, compare2) {
     }
 }
 
-TEST(multi_process, compare3) {
+TEST(multi_process, compare_algs_matrix_size_20) {
     char file_name[] = SOURCE_DIR"/tests/size_20";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 4);
@@ -67,7 +67,7 @@ TEST(multi_process, compare3) {
     }
 }
 
-TEST(multi_process, compare4) {
+TEST(multi_process, compare_algs_matrix_size_30) {
     char file_name[] = SOURCE_DIR"/tests/size_30";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 5);
@@ -91,7 +91,7 @@ TEST(multi_process, compare4) {
     }
 }
 
-TEST(multi_process, compare5) {
+TEST(multi_process, compare_algs_matrix_size_40) {
     char file_name[] = SOURCE_DIR"/tests/size_40";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 5);
@@ -115,7 +115,7 @@ TEST(multi_process, compare5) {
     }
 }
 
-TEST(multi_process, compare6) {
+TEST(multi_process, compare_algs_matrix_size_50) {
     char file_name[] = SOURCE_DIR"/tests/size_50";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 7);
@@ -139,7 +139,7 @@ TEST(multi_process, compare6) {
     }
 }
 
-TEST(multi_process, compare7) {
+TEST(multi_process, compare_algs_matrix_size_60) {
     char file_name[] = SOURCE_DIR"/tests/size_60";
 
     Calculation_multi_proc_res* res = multi_process(file_name, 5);
@@ -147,7 +147,7 @@ TEST(multi_process, compare7) {
     if (res != NULL) {
         int main = res->main_diagonal;
         int side = res->side_diagonal;
-        munmap(res, getpagesize());
+        munmap(res, sizeof(res));
 
         Matrix *matrix = read_file(file_name);
 

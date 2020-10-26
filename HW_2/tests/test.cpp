@@ -13,7 +13,7 @@ extern "C" {
     #include "multi/multi_process_utils.h"
 }
 
-TEST(read_file, read) {
+TEST(read_file, reading_from_file_test2) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/tes");
     if (matrix != NULL)
         free_matrix(matrix);
@@ -21,7 +21,7 @@ TEST(read_file, read) {
 
 // Тест синхронного алгоритма
 
-TEST(calculate_matrix, test1_calculate_matrix) {
+TEST(calculate_matrix, calculate_matrix_one_proc) {
     Matrix* matrix = read_file(SOURCE_DIR"/tests/test1");
 
     if (matrix != NULL) {
@@ -34,18 +34,18 @@ TEST(calculate_matrix, test1_calculate_matrix) {
 }
 
 ////Теста синхронного функции calculate_matrix_one_proc, которая читает и вычисляет матрицу
-//
-//TEST(calculate_matrix_one_proc, test_synchronous_calc) {
-//    char file_name[] = SOURCE_DIR"/tests/test1";
-//    Calculation_res res = calculate_matrix_one_proc(file_name);
-//
-//    EXPECT_EQ(15, res.main_diagonal);
-//    EXPECT_EQ(16, res.side_diagonal);
-//}
+
+TEST(calculate_matrix_one_proc, test_synchronous_calc) {
+    char file_name[] = SOURCE_DIR"/tests/test1";
+    Calculation_res res = calculate_matrix_one_proc(file_name);
+
+    EXPECT_EQ(15, res.main_diagonal);
+    EXPECT_EQ(16, res.side_diagonal);
+}
 
 // Тест чтения из файлов
 
-TEST(read_file, test1_read_file) {
+TEST(read_file, reading_from_file_test1) {
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/test1");
 
@@ -58,7 +58,7 @@ TEST(read_file, test1_read_file) {
     }
 }
 
-TEST(read_file, test2_read_file) {
+TEST(read_file, reading_from_file_test3) {
 
 
     Matrix* matrix = read_file(SOURCE_DIR"/tests/test2");
@@ -141,7 +141,7 @@ TEST(multi_process, test_4_multi_process) {
 // Сравнение результатов синхронного и многопроцессорного алгоритма
 // При разных матрицах и разном количестве процессов
 
-TEST(multi_process, compare) {
+TEST(multi_process, compare_algs_matrix_size_10) {
 
     char file_name[] = SOURCE_DIR"/tests/size_10";
 
@@ -166,7 +166,7 @@ TEST(multi_process, compare) {
     }
 }
 
-TEST(multi_process, compare2) {
+TEST(multi_process, compare_algs_matrix_size_23) {
 
     char file_name[] = SOURCE_DIR"/tests/size_23";
 
@@ -191,7 +191,7 @@ TEST(multi_process, compare2) {
     }
 }
 
-TEST(multi_process, compare3) {
+TEST(multi_process, compare_algs_matrix_size_123) {
 
     char file_name[] = SOURCE_DIR"/tests/size_123";
 
@@ -216,7 +216,7 @@ TEST(multi_process, compare3) {
     }
 }
 
-TEST(multi_process, compare4) {
+TEST(multi_process, compare_algs_matrix_size_200) {
 
     char file_name[] = SOURCE_DIR"/tests/size_200";
 
@@ -241,7 +241,7 @@ TEST(multi_process, compare4) {
     }
 }
 
-TEST(multi_process, compare5) {
+TEST(multi_process, compare_algs_matrix_size_555) {
 
     char file_name[] = SOURCE_DIR"/tests/size_555";
 
@@ -266,7 +266,7 @@ TEST(multi_process, compare5) {
     }
 }
 
-TEST(multi_process, compare6) {
+TEST(multi_process, compare_algs_matrix_size_666) {
 
     char file_name[] = SOURCE_DIR"/tests/size_666";
 
@@ -291,7 +291,7 @@ TEST(multi_process, compare6) {
     }
 }
 
-TEST(multi_process, compare7) {
+TEST(multi_process, compare_algs_matrix_size_1333) {
 
     char file_name[] = SOURCE_DIR"/tests/size_1333";
 
@@ -316,7 +316,7 @@ TEST(multi_process, compare7) {
     }
 }
 
-TEST(multi_process, compare8) {
+TEST(multi_process, compare_algs_matrix_size_1777) {
 
     char file_name[] = SOURCE_DIR"/tests/size_1777";
 
@@ -341,7 +341,7 @@ TEST(multi_process, compare8) {
     }
 }
 
-TEST(multi_process, compare9) {
+TEST(multi_process, compare_algs_matrix_size_5000) {
 
     char file_name[] = SOURCE_DIR"/tests/size_5000";
 
@@ -366,7 +366,7 @@ TEST(multi_process, compare9) {
     }
 }
 
-TEST(multi_process, compare10) {
+TEST(multi_process, compare_algs_matrix_size_10000) {
 
     char file_name[] = SOURCE_DIR"/tests/size_10000";
 
