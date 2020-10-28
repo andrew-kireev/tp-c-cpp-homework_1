@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <pthread.h>
+#include <sys/wait.h>
 
 
 int create_forks(int num, int *pids) {
