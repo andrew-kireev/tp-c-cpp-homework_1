@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
-#include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
 #include "one/one_proc_utils.h"
