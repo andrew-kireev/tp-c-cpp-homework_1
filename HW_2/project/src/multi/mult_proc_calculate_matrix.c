@@ -3,6 +3,7 @@
 //
 
 #include "multi/multi_process_utils.h"
+
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,53 +38,6 @@ Calculation_multi_proc_res *create_shared_memory() {
     return shared_memory;
 }
 
-
-
-Calculation_multi_proc_res* multi_process(char* file_name, int num_forks) {
-    Matrix* matrix;
-    matrix = read_file(file_name);
-
-    if (matrix == NULL)
-        return NULL;
-    if ((size_t)num_forks > matrix->size)
-        num_forks = matrix->size;
-    int *pids = (int*)malloc(sizeof(int) * num_forks);
-    for (int i = 0; i != num_forks; ++i)
-        pids[i] = 0;
-
-    Calculation_multi_proc_res* res;
-
-    if ((res = create_shared_memory()) == NULL) {
-        free_matrix(matrix);
-        free(pids);
-        return NULL;
-    }
-
-    pthread_mutexattr_t attr;
-    pthread_mutexattr_init(&attr);
-    pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
-    pthread_mutex_init(&res->mutex, &attr);
-
-    int process_number;
-    if ((process_number = create_forks(num_forks, pids)) == -1) {
-        munmap(res, getpagesize());
-        free_matrix(matrix);
-        free(pids);
-        return NULL;
-    }
-
-    if (process_number != PARENT_PID)
-        calculate_multi_proc(matrix, res, process_number, num_forks);
-
-    for (int i = 0; i < num_forks; i++) {
-        while (waitpid(pids[i], NULL, 0) > 0) {}
-    }
-
-    free_matrix(matrix);
-    free(pids);
-    return res;
-}
-
 int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int proc_number, int procs_amount) {
     int n = matrix->size;
     int line_for_proc = (n / procs_amount);
@@ -109,3 +63,68 @@ int calculate_multi_proc(Matrix* matrix, Calculation_multi_proc_res* res, int pr
     }
     exit(0);
 }
+
+int select_proc_num(size_t matrix_size) {
+    if (matrix_size < 100)
+        return 1;
+    if (matrix_size < 1000)
+        return 2;
+    if (matrix_size < 5000)
+        return 3;
+    if (matrix_size < 10000)
+        return 4;
+    if (matrix_size < 20000)
+        return 6;
+    if (matrix_size < 100000)
+        return 7;
+    return 10;
+}
+
+Calculation_res* multi_process(Matrix* matrix) {
+    if (matrix == NULL)
+        return NULL;
+    int num_forks = select_proc_num(matrix->size);
+    int *pids = (int*)malloc(sizeof(int) * num_forks);
+    for (int i = 0; i != num_forks; ++i)
+        pids[i] = 0;
+
+    Calculation_multi_proc_res* res;
+
+    if ((res = create_shared_memory()) == NULL) {
+        free(pids);
+        return NULL;
+    }
+
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+    pthread_mutex_init(&res->mutex, &attr);
+
+    int process_number;
+    if ((process_number = create_forks(num_forks, pids)) == -1) {
+        munmap(res, getpagesize());
+        free(pids);
+        return NULL;
+    }
+
+    if (process_number != PARENT_PID)
+        calculate_multi_proc(matrix, res, process_number, num_forks);
+
+    for (int i = 0; i < num_forks; i++) {
+        while (waitpid(pids[i], NULL, 0) > 0) {}
+    }
+
+    Calculation_res* res_to_return;
+    if ((res_to_return = (Calculation_res*)malloc(sizeof(Calculation_res))) == NULL) {
+        munmap(res, getpagesize());
+        free(pids);
+        return NULL;
+    }
+    res_to_return->main_diagonal = res->main_diagonal;
+    res_to_return->side_diagonal = res->side_diagonal;
+    munmap(res, getpagesize());
+
+    free(pids);
+    return res_to_return;
+}
+

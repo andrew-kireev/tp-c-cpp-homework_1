@@ -4,6 +4,7 @@
 
 #include "utils.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Matrix* read_file(const char* file_name) {
     FILE* file;

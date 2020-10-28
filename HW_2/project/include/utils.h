@@ -5,8 +5,7 @@
 #ifndef HW_2_UTILS_H
 #define HW_2_UTILS_H
 
-#include <stdlib.h>
-#include <pthread.h>
+#include <stdio.h>
 
 typedef struct {
     size_t size;
